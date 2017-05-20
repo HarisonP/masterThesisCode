@@ -21,3 +21,10 @@ def middle_point_between(point_a, point_b):
 @round_decorate
 def middle_1dpoint(point_a, point_b):
     return (point_b + point_a) / 2
+
+def middle_n_1dpoint(points):
+    return sum(points) / len(points)
+
+
+def middle_point_between_n(points):
+    return [int(middle_n_1dpoint([p[0] for p in points])), int(middle_n_1dpoint([p[1] for p in points]))]
