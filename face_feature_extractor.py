@@ -104,7 +104,6 @@ class FaceFeatureExtractor:
         self.add_feature("Left Eye Size", left_eye_size)
         self.add_feature("Right Eye Size", right_eye_size)
         # TODO calc this not with the scaled sizes
-
         self.add_feature("Left Eye Size to Right Eye Size", left_eye_size / right_eye_size)
 
     def extract_face_sizes(self):
@@ -137,6 +136,33 @@ class FaceFeatureExtractor:
 
         self.add_feature("Relative size of the forhead", self.__scale_distance(self.face_height - chin_to_nose_end_height))
 
+        self.add_feature("Checkbown width", self.__scale_distance(self.face_width - chin_width))
+        self.add_feature("Checkbown width to face width", (self.face_width - chin_width) / self.face_width)
+
+
+    def extract_eyebrows_features(self):
+        # TODO use min between heights of the eyebrow points
+        left_eyebrow_height = self.shape[constants.LEFT_EYEBROW_OUTER_POINT_INDEX][1] - self.shape[constants.LEFT_EYEBROW_HEIGHEST_POINT_INDEX][1]
+        right_eyebrow_height = self.shape[constants.RIGHT_EYEBROW_OUTER_POINT_INDEX][1] - self.shape[constants.RIGHT_EYEBROW_HEIGHEST_POINT_INDEX][1]
+        self.add_feature("Left eyebrow height", self.__scale_distance(left_eyebrow_height))
+        self.add_feature("Right eyebrow height", self.__scale_distance(right_eyebrow_height))
+
+    def extract_nose_features(self):
+        nose_width = geometry_helper.point_distance(self.shape[constants.NOSE_LEFTEST_POINT_INDEX],
+                                                    self.shape[constants.NOSE_RIGHTEST_POINT_INDEX])
+
+        self.add_feature("Nose width at nostrils", self.__scale_distance(nose_width))
+
+        nose_form = (self.shape[constants.NOSE_MIDDLE_POINT_INDEX][1] - self.shape[constants.NOSE_LEFTEST_POINT_INDEX][1])
+        nose_form += (self.shape[constants.NOSE_MIDDLE_POINT_INDEX][1] - self.shape[constants.NOSE_RIGHTEST_POINT_INDEX][1])
+
+        self.add_feature("Nose form", self.__scale_distance(nose_form));
+
+        nose_height = geometry_helper.point_distance(self.shape[constants.NOSE_MIDDLE_POINT_INDEX],
+                                                    self.shape[constants.NOSE_HEIGHTES_POINT_INDEX])
+
+        self.add_feature("Nose height", self.__scale_distance(nose_height))
+        self.add_feature("Nose Size", self.__scale_distance(nose_height * nose_width))
 
     def print_face_detected_with_shape(self):
         # loop over the face detections
@@ -174,6 +200,8 @@ class FaceFeatureExtractor:
     def get_face_features(self):
         self.extract_face_sizes()
         self.extract_eyes_features()
+        self.extract_eyebrows_features()
+        self.extract_nose_features()
         return self.features
 
     def print_features(self):
