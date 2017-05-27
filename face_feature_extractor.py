@@ -164,14 +164,73 @@ class FaceFeatureExtractor:
         self.add_feature("Nose height", self.__scale_distance(nose_height))
         self.add_feature("Nose Size", self.__scale_distance(nose_height * nose_width))
 
+        left_nostril_size = geometry_helper.point_distance(self.shape[constants.NOSE_MIDDLE_POINT_INDEX],
+                                                           self.shape[constants.NOSE_LEFTEST_POINT_INDEX])
+
+
+        right_nostril_size = geometry_helper.point_distance(self.shape[constants.NOSE_MIDDLE_POINT_INDEX],
+                                                           self.shape[constants.NOSE_RIGHTEST_POINT_INDEX])
+
+        self.add_feature("Left nostril size", self.__scale_distance(left_nostril_size))
+        self.add_feature("Right nostril size", self.__scale_distance(right_nostril_size))
+        self.add_feature("Left nostril size to right nostril size", left_nostril_size / right_nostril_size)
+
+
+    def extract_mouth_features(self):
+        lower_lip_height = geometry_helper.point_distance(self.shape[constants.MOUTH_LOWEST_POINT_INDEX],
+                                                          self.shape[constants.LOWER_LIP_END_POINT_INDEX])
+
+        upper_lip_height = geometry_helper.point_distance(self.shape[constants.MOUTH_HIGHEST_POINT_INDEX],
+                                                          self.shape[constants.UPPER_LIP_END_POINT_INDEX])
+
+        self.add_feature("Lower lip relative height", self.__scale_distance(lower_lip_height))
+        self.add_feature("Upper lip relative height", self.__scale_distance(upper_lip_height))
+        self.add_feature("Lower lip to upper lip heights", self.__scale_distance(lower_lip_height / upper_lip_height));
+
+        mouth_width = geometry_helper.point_distance(self.shape[constants.MOUTH_LEFT_CORNER_INDEX],
+                                                     self.shape[constants.MOUTH_RIGHT_CORNER_INDEX])
+
+        self.add_feature("Mouth width", self.__scale_distance(mouth_width))
+
+        left_checkbown_height = geometry_helper.point_distance(self.shape[constants.MOUTH_LEFT_CORNER_INDEX],
+                                                               self.shape[constants.LEFT_EYE_LAST_POINT_INDEX - 1])
+        right_checkbown_height = geometry_helper.point_distance(self.shape[constants.MOUTH_RIGHT_CORNER_INDEX],
+                                                               self.shape[constants.RIGHT_EYE_LAST_POINT_INDEX - 1])
+
+        self.add_feature("Left checkbown height", self.__scale_distance(left_checkbown_height))
+        self.add_feature("Right checkbown height", self.__scale_distance(right_checkbown_height))
+
+
+        left_jaw_size = geometry_helper.point_distance(self.shape[constants.LEFT_CHIN_START],
+                                                        self.shape[constants.MOUTH_LEFT_CORNER_INDEX])
+
+        right_jaw_size = geometry_helper.point_distance(self.shape[constants.RIGHT_CHIN_START],
+                                                        self.shape[constants.MOUTH_RIGHT_CORNER_INDEX])
+
+        self.add_feature("Left jaw size", self.__scale_distance(left_jaw_size))
+        self.add_feature("Right jaw size", self.__scale_distance(right_jaw_size))
+        self.add_feature("Left checkbown height to left jaw size", left_checkbown_height / left_jaw_size)
+        self.add_feature("Right checkbown height to right jaw size", right_checkbown_height / right_jaw_size)
+
     def print_face_detected_with_shape(self):
         # loop over the face detections
         (x, y, w, h) = face_utils.rect_to_bb(self.rect)
         (xf, yf, wf, hf) = self.full_face
+        (hair_rect_x, hair_rect_y, hair_rect_width, hair_rect_height) = self.hair_color_rect
 
         cv2.rectangle(self.image, (x, y), (x + w, y + h), (0, 255, 0), 2)
         cv2.rectangle(self.image, (xf, yf), (xf + wf, yf + hf), (255, 0, 0), 2)
-        print(w, h)
+
+        # hair color rect.
+        cv2.rectangle(self.image, (hair_rect_x, hair_rect_y),
+                     (hair_rect_x + hair_rect_width, hair_rect_y - hair_rect_height),
+                     (0, 0, 255), 2)
+        # skin color rect
+
+        cv2.rectangle(self.image, (hair_rect_x, hair_rect_y),
+                     (hair_rect_x + hair_rect_width, hair_rect_y + hair_rect_height),
+                     (0, 255, 255), 2)
+
         # show the face number
         cv2.putText(self.image, "Face #{}".format(1), (x - 10, y - 10),
             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
@@ -202,7 +261,28 @@ class FaceFeatureExtractor:
         self.extract_eyes_features()
         self.extract_eyebrows_features()
         self.extract_nose_features()
+        self.extract_mouth_features()
+        self.extract_hair_color()
+        self.extract_skintone_feature()
         return self.features
+
+    def extract_hair_color(self):
+        hair_rect_width = int(self.face_width / 3)
+        hair_rect_height = int(self.face_height / 3)
+
+        hair_rect_x = int(self.heightest_face_point[0] - hair_rect_width / 2)
+        hair_rect_y = int(self.heightest_face_point[1])
+
+        rect = self.gray[hair_rect_y - hair_rect_height : hair_rect_y, hair_rect_x:hair_rect_x + hair_rect_width]
+
+        self.add_feature("Hair Grayscaled color", rect.mean())
+        self.hair_color_rect = [hair_rect_x, hair_rect_y, hair_rect_width, hair_rect_height]
+
+    # Must be called after extract_hair_color
+    def extract_skintone_feature(self):
+        (hair_rect_x, hair_rect_y, hair_rect_width, hair_rect_height) = self.hair_color_rect
+        rect = self.gray[hair_rect_y: hair_rect_y + hair_rect_height, hair_rect_x:hair_rect_x + hair_rect_width]
+        self.add_feature("Skintone Grayscaled color", rect.mean())
 
     def print_features(self):
         for i, feature_val in enumerate(self.features['features_values']):

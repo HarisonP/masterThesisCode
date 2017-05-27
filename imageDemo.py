@@ -40,6 +40,7 @@ ap.add_argument("-i", "--image", required=True,
 args = vars(ap.parse_args())
 
 feature_extractor = FaceFeatureExtractor(args["image"])
-feature_extractor.print_face_detected_with_shape()
 feature_extractor.get_face_features()
+feature_extractor.print_face_detected_with_shape()
+
 feature_extractor.print_features()
