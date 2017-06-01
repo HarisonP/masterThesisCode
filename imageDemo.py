@@ -5,8 +5,10 @@ import imutils
 import dlib
 import cv2
 from face_feature_extractor import FaceFeatureExtractor
-
-
+from scores_extractor import ScoresExtractor
+from models_trainer import ModelsTrainer
+import glob
+import os
 # def rect_to_bb(rect):
 #     # take a bounding predicted by dlib and convert it
 #     # to the format (x, y, w, h) as we would normally do
@@ -39,8 +41,27 @@ ap.add_argument("-i", "--image", required=True,
     help="path to input image")
 args = vars(ap.parse_args())
 
-feature_extractor = FaceFeatureExtractor(args["image"])
-feature_extractor.get_face_features()
-feature_extractor.print_face_detected_with_shape()
+# feature_extractor = FaceFeatureExtractor(args["image"])
+# feature_extractor.get_face_features()
+# feature_extractor.print_face_detected_with_shape()
+# feature_extractor.print_features()
 
-feature_extractor.print_features()
+
+
+scores_extractor = ScoresExtractor( glob.glob(os.path.realpath('./scores/*.txt')))
+scores = scores_extractor.extract_average_scores()
+all_images = glob.glob(os.path.realpath('./dataset/*.jpg'))
+
+print(len(all_images))
+print(scores)
+features = {}
+for filename in all_images:
+    next_feature_extractor = FaceFeatureExtractor(filename)
+    features[os.path.basename(filename)] = next_feature_extractor.get_face_features()
+
+models_trainer = ModelsTrainer(features, scores)
+reg_tree = models_trainer.train_regression_tree()
+models_trainer.print_regression_tree(reg_tree)
+
+print(reg_tree.predict(features['0_natalie_dormer.jpg']['features_values']))
+print(scores['0_natalie_dormer.jpg'])

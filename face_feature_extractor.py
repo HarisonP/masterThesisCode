@@ -267,13 +267,17 @@ class FaceFeatureExtractor:
         return self.features
 
     def extract_hair_color(self):
-        hair_rect_width = int(self.face_width / 3)
-        hair_rect_height = int(self.face_height / 3)
+        hair_rect_width = int(self.face_width / 2)
+        hair_rect_height = int(self.face_height / 5)
 
         hair_rect_x = int(self.heightest_face_point[0] - hair_rect_width / 2)
         hair_rect_y = int(self.heightest_face_point[1])
 
-        rect = self.gray[hair_rect_y - hair_rect_height : hair_rect_y, hair_rect_x:hair_rect_x + hair_rect_width]
+
+        rect_height = max(hair_rect_y - hair_rect_height, 0)
+        rect_width = min(hair_rect_x + hair_rect_width, constants.FACE_IMAGE_SIZE)
+
+        rect = self.gray[rect_height: hair_rect_y, hair_rect_x:rect_width]
 
         self.add_feature("Hair Grayscaled color", rect.mean())
         self.hair_color_rect = [hair_rect_x, hair_rect_y, hair_rect_width, hair_rect_height]
@@ -281,7 +285,11 @@ class FaceFeatureExtractor:
     # Must be called after extract_hair_color
     def extract_skintone_feature(self):
         (hair_rect_x, hair_rect_y, hair_rect_width, hair_rect_height) = self.hair_color_rect
-        rect = self.gray[hair_rect_y: hair_rect_y + hair_rect_height, hair_rect_x:hair_rect_x + hair_rect_width]
+
+        rect_height = min(hair_rect_y + hair_rect_height, constants.FACE_IMAGE_SIZE)
+        rect_width = min(hair_rect_x + hair_rect_width, constants.FACE_IMAGE_SIZE)
+
+        rect = self.gray[hair_rect_y: rect_height, hair_rect_x:rect_width]
         self.add_feature("Skintone Grayscaled color", rect.mean())
 
     def print_features(self):

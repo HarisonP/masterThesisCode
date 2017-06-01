@@ -1,5 +1,5 @@
 DETECTOR_MODEL = "precompiled_models/shape_predictor_68_face_landmarks.dat"
-FACE_IMAGE_SIZE = 1000
+FACE_IMAGE_SIZE = 250
 
 LOWEST_CHIN_POINT_INDEX = 8
 HIGHTEST_CHIN_POINT_INDEX = 57
