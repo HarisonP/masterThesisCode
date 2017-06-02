@@ -69,9 +69,10 @@ with open('features.json') as json_data:
 models_trainer = ModelsTrainer(features, scores)
 reg_tree = models_trainer.train_regression_tree()
 models_trainer.print_regression_tree(reg_tree)
+svm = models_trainer.train_svm()
 
 # print(models_trainer.mean_squared_error(reg_tree))
-print(models_trainer.mean_abs_error(reg_tree))
-
+print("Tree: ", models_trainer.mean_abs_error(reg_tree))
+print("SVM: ", models_trainer.mean_abs_error(svm))
 # print(reg_tree.predict(features['0_natalie_dormer.jpg']['features_values']))
 # print(scores['0_natalie_dormer.jpg'])

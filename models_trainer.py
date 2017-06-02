@@ -3,6 +3,7 @@ from sklearn import tree
 import pydotplus
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
+from sklearn import svm
 
 class ModelsTrainer:
     def __init__(self, features, scores):
@@ -18,7 +19,7 @@ class ModelsTrainer:
 
         print(self.test_set_size)
 
-        for index, (key, value) in enumerate(features.items()):
+        for index, (key, value) in enumerate(sorted(features.items())):
             if (index > self.test_set_size):
                 self.train_set[key] = value
                 self.train_scores[key] = scores[key]
@@ -27,11 +28,19 @@ class ModelsTrainer:
                 self.test_scores[key] = scores[key]
         print(len(self.test_set))
 
+    def train_svm(self):
+        X = [value['features_values'] for key, value in self.train_set.items()]
+        Y = [self.train_scores[key] for key, value in self.train_set.items()]
+
+        clf = svm.SVR(kernel="poly", degree=1, gamma = 0.0001)
+        return clf.fit(X, Y)
+
+
     def train_regression_tree(self):
         X = [value['features_values'] for key, value in self.train_set.items()]
         Y = [self.train_scores[key] for key, value in self.train_set.items()]
 
-        reg_tree = tree.DecisionTreeRegressor(max_depth=5)
+        reg_tree = tree.DecisionTreeRegressor(random_state=1)
         return reg_tree.fit(X, Y)
 
     def print_regression_tree(self, reg_tree):
@@ -56,5 +65,4 @@ class ModelsTrainer:
         X = [test_example['features_values'] for key, test_example in  self.test_set.items()]
         prediction = regressior.predict(X)
         scores = [self.test_scores[key] for key, value in self.test_set.items()]
-
         return mean_absolute_error(scores, prediction)
