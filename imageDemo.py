@@ -10,6 +10,8 @@ from models_trainer import ModelsTrainer
 import glob
 import os
 import json
+from collections import OrderedDict
+import math
 
 # def rect_to_bb(rect):
 #     # take a bounding predicted by dlib and convert it
@@ -56,7 +58,7 @@ all_images = glob.glob(os.path.realpath('./dataset/*.jpg'))
 
 features = {}
 with open('features.json') as json_data:
-    features = json.load(json_data)
+    features = json.load(json_data, object_pairs_hook=OrderedDict)
 
 # for filename in all_images:
 #     next_feature_extractor = FaceFeatureExtractor(filename)
@@ -67,12 +69,11 @@ with open('features.json') as json_data:
 
 
 models_trainer = ModelsTrainer(features, scores)
-reg_tree = models_trainer.train_regression_tree()
-models_trainer.print_regression_tree(reg_tree)
-svm = models_trainer.train_svm()
-
-# print(models_trainer.mean_squared_error(reg_tree))
-print("Tree: ", models_trainer.mean_abs_error(reg_tree))
-print("SVM: ", models_trainer.mean_abs_error(svm))
-# print(reg_tree.predict(features['0_natalie_dormer.jpg']['features_values']))
-# print(scores['0_natalie_dormer.jpg'])
+print(models_trainer.abs_error_tree())
+tree_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_tree()])
+print("Accuracy: %0.2f (+/- %0.2f)" % (tree_scores.mean(), tree_scores.std() * 2))
+print(tree_scores)
+print(models_trainer.abs_error_svm())
+svm_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_svm()])
+print(svm_scores)
+print("Accuracy: %0.2f (+/- %0.2f)" % (svm_scores.mean(), svm_scores.std() * 2))

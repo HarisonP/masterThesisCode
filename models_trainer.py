@@ -4,65 +4,89 @@ import pydotplus
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn import svm
+from sklearn.model_selection import cross_val_score
 
 class ModelsTrainer:
     def __init__(self, features, scores):
-        TEST_SET_SIZE = 20 / 100
 
-        self.train_set = {}
-        self.test_set = {}
+        self.features_names = [value['features_names'] for key, value in features.items()][0]
+        self.X = [value['features_values'] for key, value in features.items()]
+        self.Y = [scores[key] for key, value in features.items()]
 
-        self.train_scores = {}
-        self.test_scores = {}
+    def get_svm(self):
+        return svm.SVR(kernel="poly", degree=1, gamma = 0.0001)
 
-        self.test_set_size = int(TEST_SET_SIZE * len(features))
+    def get_tree(self):
+        return tree.DecisionTreeRegressor(random_state=1)
 
-        print(self.test_set_size)
+    def train_svm(self, X, Y):
+        return self.get_svm().fit(X, Y)
 
-        for index, (key, value) in enumerate(sorted(features.items())):
-            if (index > self.test_set_size):
-                self.train_set[key] = value
-                self.train_scores[key] = scores[key]
-            else:
-                self.test_set[key] = value
-                self.test_scores[key] = scores[key]
-        print(len(self.test_set))
-
-    def train_svm(self):
-        X = [value['features_values'] for key, value in self.train_set.items()]
-        Y = [self.train_scores[key] for key, value in self.train_set.items()]
-
-        clf = svm.SVR(kernel="poly", degree=1, gamma = 0.0001)
-        return clf.fit(X, Y)
-
-
-    def train_regression_tree(self):
-        X = [value['features_values'] for key, value in self.train_set.items()]
-        Y = [self.train_scores[key] for key, value in self.train_set.items()]
-
-        reg_tree = tree.DecisionTreeRegressor(random_state=1)
-        return reg_tree.fit(X, Y)
+    def train_regression_tree(self, X, Y):
+        return self.get_tree().fit(X, Y)
 
     def print_regression_tree(self, reg_tree):
-        features_names = [value['features_names'] for key, value in self.train_set.items()][0]
 
         dot_data = tree.export_graphviz(reg_tree, out_file=None,
-                         feature_names=features_names,
+                         feature_names=self.features_names,
                          filled=True, rounded=True,
                          special_characters=True)
 
         graph = pydotplus.graph_from_dot_data(dot_data)
-        graph.write_pdf("iris.pdf")
+        graph.write_pdf("tree.pdf")
 
-    def mean_squared_error(self, regressior):
-        X = [test_example['features_values'] for key, test_example in  self.test_set.items()]
-        prediction = regressior.predict(X)
-        scores = [self.test_scores[key] for key, value in self.test_set.items()]
+    def squared_error_tree(self):
+        TEST_SET_SIZE =  20 / 100
+        test_set_index = int(len(self.X) * TEST_SET_SIZE)
+        train_set = self.X[0 : test_set_index]
+        train_set_scores = self.Y[0 : test_set_index]
+        reg_tree = self.train_regression_tree(train_set, train_set_scores)
 
-        return mean_squared_error(scores, prediction)
+        return self.mean_squared_error(reg_tree, self.X[-test_set_index :], self.Y[-test_set_index : ])
 
-    def mean_abs_error(self, regressior):
-        X = [test_example['features_values'] for key, test_example in  self.test_set.items()]
-        prediction = regressior.predict(X)
-        scores = [self.test_scores[key] for key, value in self.test_set.items()]
-        return mean_absolute_error(scores, prediction)
+    def abs_error_tree(self):
+        TEST_SET_SIZE =  20 / 100
+        test_set_index = int(len(self.X) * TEST_SET_SIZE)
+        train_set = self.X[0 : test_set_index]
+        train_set_scores = self.Y[0 : test_set_index]
+        reg_tree = self.train_regression_tree(train_set, train_set_scores)
+
+        return self.mean_abs_error(reg_tree, self.X[-test_set_index : ], self.Y[-test_set_index : ])
+
+    def squared_error_svm(self):
+        TEST_SET_SIZE =  20 / 100
+        test_set_index = int(len(self.X) * TEST_SET_SIZE)
+        train_set = self.X[0 : test_set_index]
+        train_set_scores = self.Y[0 : test_set_index]
+        reg_tree = self.train_svm(train_set, train_set_scores)
+
+        return self.mean_squared_error(reg_tree, self.X[-test_set_index :], self.Y[-test_set_index : ])
+
+    def abs_error_svm(self):
+        TEST_SET_SIZE =  20 / 100
+        test_set_index = int(len(self.X) * TEST_SET_SIZE)
+        train_set = self.X[0 : test_set_index]
+        train_set_scores = self.Y[0 : test_set_index]
+        reg_tree = self.train_svm(train_set, train_set_scores)
+
+        return self.mean_abs_error(reg_tree, self.X[-test_set_index : ], self.Y[-test_set_index : ])
+
+
+    def cross_val_svm(self):
+        clf = self.get_svm();
+        scores = cross_val_score(clf, self.X, self.Y, cv=10)
+        return scores
+
+    def cross_val_tree(self):
+        clf = self.get_tree();
+        scores = cross_val_score(clf, self.X, self.Y, cv=10)
+        return scores
+
+
+    def mean_squared_error(self, regressior, test_set, test_scores):
+        prediction = regressior.predict(test_set)
+        return mean_squared_error(test_scores, prediction)
+
+    def mean_abs_error(self, regressior,  test_set, test_scores):
+        prediction = regressior.predict(test_set)
+        return mean_absolute_error(test_scores, prediction)
