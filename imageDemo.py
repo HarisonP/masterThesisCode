@@ -9,6 +9,8 @@ from scores_extractor import ScoresExtractor
 from models_trainer import ModelsTrainer
 import glob
 import os
+import json
+
 # def rect_to_bb(rect):
 #     # take a bounding predicted by dlib and convert it
 #     # to the format (x, y, w, h) as we would normally do
@@ -52,16 +54,24 @@ scores_extractor = ScoresExtractor( glob.glob(os.path.realpath('./scores/*.txt')
 scores = scores_extractor.extract_average_scores()
 all_images = glob.glob(os.path.realpath('./dataset/*.jpg'))
 
-print(len(all_images))
-print(scores)
 features = {}
-for filename in all_images:
-    next_feature_extractor = FaceFeatureExtractor(filename)
-    features[os.path.basename(filename)] = next_feature_extractor.get_face_features()
+with open('features.json') as json_data:
+    features = json.load(json_data)
+
+# for filename in all_images:
+#     next_feature_extractor = FaceFeatureExtractor(filename)
+#     features[os.path.basename(filename)] = next_feature_extractor.get_face_features()
+
+# with open('features.json', 'w') as outfile:
+#     json.dump(features, outfile)
+
 
 models_trainer = ModelsTrainer(features, scores)
 reg_tree = models_trainer.train_regression_tree()
 models_trainer.print_regression_tree(reg_tree)
 
-print(reg_tree.predict(features['0_natalie_dormer.jpg']['features_values']))
-print(scores['0_natalie_dormer.jpg'])
+# print(models_trainer.mean_squared_error(reg_tree))
+print(models_trainer.mean_abs_error(reg_tree))
+
+# print(reg_tree.predict(features['0_natalie_dormer.jpg']['features_values']))
+# print(scores['0_natalie_dormer.jpg'])

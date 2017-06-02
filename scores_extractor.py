@@ -5,7 +5,6 @@ class ScoresExtractor:
     def __init__(self, file_names):
         self.filenames = file_names
         self.number_of_scores = len(file_names)
-        print(self.filenames)
 
     def extract_average_scores(self):
         sum_of_scores = defaultdict(lambda: 0, {})

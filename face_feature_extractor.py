@@ -248,8 +248,6 @@ class FaceFeatureExtractor:
 
         cv2.circle(self.image, (self.heightest_face_point[0], self.heightest_face_point[1] - 10), 5, (255, 155, 0), -1)
 
-        print(self.left_pupils, self.rigth_pupils);
-
         cv2.circle(self.image, (self.left_pupils[0], self.left_pupils[1]), 3, (100, 200, 255), -1)
         cv2.circle(self.image, (self.rigth_pupils[0], self.rigth_pupils[1]), 3, (100, 200, 255), -1)
 

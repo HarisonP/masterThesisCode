@@ -8,7 +8,7 @@ files = (file for file in os.listdir(path)
 
 
 filesSorted = sorted(files, key=lambda x: int(x.split('_')[0]))
-print(filesSorted)
+
 for filename in filesSorted:
         template[filename] = 0;
 
