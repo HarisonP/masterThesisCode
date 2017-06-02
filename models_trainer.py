@@ -14,7 +14,7 @@ class ModelsTrainer:
         self.Y = [scores[key] for key, value in features.items()]
 
     def get_svm(self):
-        return svm.SVR(kernel="poly", degree=1, gamma = 0.0001)
+        return svm.SVR(kernel="poly", degree=1, gamma = 0.001)
 
     def get_tree(self):
         return tree.DecisionTreeRegressor(random_state=1)
@@ -74,12 +74,12 @@ class ModelsTrainer:
 
     def cross_val_svm(self):
         clf = self.get_svm();
-        scores = cross_val_score(clf, self.X, self.Y, cv=10)
+        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
         return scores
 
     def cross_val_tree(self):
         clf = self.get_tree();
-        scores = cross_val_score(clf, self.X, self.Y, cv=10)
+        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
         return scores
 
 

@@ -70,10 +70,13 @@ with open('features.json') as json_data:
 
 models_trainer = ModelsTrainer(features, scores)
 print(models_trainer.abs_error_tree())
+
 tree_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_tree()])
 print("Accuracy: %0.2f (+/- %0.2f)" % (tree_scores.mean(), tree_scores.std() * 2))
 print(tree_scores)
+
 print(models_trainer.abs_error_svm())
 svm_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_svm()])
+
 print(svm_scores)
 print("Accuracy: %0.2f (+/- %0.2f)" % (svm_scores.mean(), svm_scores.std() * 2))
