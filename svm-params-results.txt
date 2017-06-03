@@ -1,3 +1,5 @@
+Mixed
+
 return svm.SVR(kernel="poly", degree=1, gamma = 0.01) - Accuracy: 1.69 (+/- 0.94)
 
 svm.SVR(kernel="poly", degree=1, gamma = 0.001) - Accuracy: 1.58 (+/- 0.83)
@@ -5,3 +7,104 @@ svm.SVR(kernel="poly", degree=1, gamma = 0.001) - Accuracy: 1.58 (+/- 0.83)
 return svm.SVR(kernel="poly", degree=1, gamma = 0.0001) - Accuracy: 1.60 (+/- 0.99)
 
 return svm.SVR(kernel="poly", degree=1, gamma = 0.0005)  - Accuracy: 1.56 (+/- 0.86)
+
+61 photos
+Mixed Tree Cross Valid Error: 2.29 (+/- 0.78)
+Mixed SVM Cross Valid Error: 1.57 (+/- 1.41)
+Mixed KNN Cross Valid Error: 1.62 (+/- 1.24)
+
+63 photos
+Mixed Tree Cross Valid Error: 2.14 (+/- 0.80)
+Mixed SVM Cross Valid Error: 1.65 (+/- 0.99)
+Mixed KNN Cross Valid Error: 1.63 (+/- 1.05)
+
+
+Number of photos: 65
+Mixed Tree Cross Valid Error: 2.02 (+/- 1.05)
+Mixed SVM Cross Valid Error: 1.58 (+/- 1.31)
+Mixed KNN Cross Valid Error: 1.68 (+/- 1.37)
+
+
+Number of photos: 68
+Mixed Tree Cross Valid Error: 2.04 (+/- 0.88)
+Mixed SVM Cross Valid Error: 1.54 (+/- 0.81)
+Mixed KNN Cross Valid Error: 1.75 (+/- 0.81)
+
+
+Number of photos: 69
+Mixed Tree Cross Valid Error: 2.25 (+/- 1.05)
+Mixed SVM Cross Valid Error: 1.60 (+/- 1.01)
+Mixed KNN Cross Valid Error: 1.73 (+/- 0.78)
+
+Number of photos: 71
+Mixed Tree Cross Valid Error: 2.22 (+/- 1.30)
+Mixed SVM Cross Valid Error: 1.60 (+/- 0.66)
+Mixed KNN Cross Valid Error: 1.81 (+/- 0.88)
+
+
+Number of photos: 77
+Mixed Tree Cross Valid Error: 1.89 (+/- 1.34)
+Mixed SVM Cross Valid Error: 1.56 (+/- 0.92)
+Mixed KNN Cross Valid Error: 1.69 (+/- 1.40)
+
+
+Number of photos: 79
+Mixed Tree Cross Valid Error: 2.30 (+/- 1.10)
+Mixed SVM Cross Valid Error: 1.66 (+/- 0.78)
+Mixed KNN Cross Valid Error: 1.72 (+/- 0.67)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.78 (+/- 0.83)
+Women SVM Cross Valid Error: 1.55 (+/- 1.02)
+Women KNN Cross Valid Error: 1.77 (+/- 1.24)
+Number of photos: 35
+Men Tree Cross Valid Error: 2.24 (+/- 1.15)
+Men SVM Cross Valid Error: 1.24 (+/- 0.77)
+Men KNN Cross Valid Error: 1.72 (+/- 1.19)
+
+
+
+With random forest: n-est = 100
+Number of photos: 79
+Mixed Tree Cross Valid Error: 1.60 (+/- 0.78)
+Mixed SVM Cross Valid Error: 1.66 (+/- 0.78)
+Mixed KNN Cross Valid Error: 1.71 (+/- 0.95)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.49 (+/- 0.90)
+Women SVM Cross Valid Error: 1.55 (+/- 1.02)
+Women KNN Cross Valid Error: 1.84 (+/- 1.34)
+Number of photos: 35
+Men Tree Cross Valid Error: 1.54 (+/- 1.14)
+Men SVM Cross Valid Error: 1.24 (+/- 0.77)
+Men KNN Cross Valid Error: 1.46 (+/- 1.29)
+
+
+
+return RandomForestRegressor(random_state=1, n_estimators=1000)
+Number of photos: 79
+Mixed Tree Cross Valid Error: 1.60 (+/- 0.79)
+Mixed SVM Cross Valid Error: 1.66 (+/- 0.78)
+Mixed KNN Cross Valid Error: 1.71 (+/- 0.95)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.46 (+/- 0.82)
+Women SVM Cross Valid Error: 1.55 (+/- 1.02)
+Women KNN Cross Valid Error: 1.84 (+/- 1.34)
+Number of photos: 35
+Men Tree Cross Valid Error: 1.54 (+/- 1.24)
+Men SVM Cross Valid Error: 1.24 (+/- 0.77)
+Men KNN Cross Valid Error: 1.46 (+/- 1.29)
+
+
+
+
+return RandomForestRegressor(random_state=1, n_estimators=150)
+Mixed Tree Cross Valid Error: 1.60 (+/- 0.79)
+Mixed SVM Cross Valid Error: 1.66 (+/- 0.78)
+Mixed KNN Cross Valid Error: 1.71 (+/- 0.95)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.45 (+/- 0.92)
+Women SVM Cross Valid Error: 1.55 (+/- 1.02)
+Women KNN Cross Valid Error: 1.84 (+/- 1.34)
+Number of photos: 35
+Men Tree Cross Valid Error: 1.53 (+/- 1.14)
+Men SVM Cross Valid Error: 1.24 (+/- 0.77)
+Men KNN Cross Valid Error: 1.46 (+/- 1.29)

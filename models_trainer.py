@@ -5,7 +5,9 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn import svm
 from sklearn.model_selection import cross_val_score
-
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.neighbors import RadiusNeighborsRegressor
+from sklearn.ensemble import RandomForestRegressor
 class ModelsTrainer:
     def __init__(self, features, scores):
 
@@ -17,7 +19,13 @@ class ModelsTrainer:
         return svm.SVR(kernel="poly", degree=1, gamma = 0.001)
 
     def get_tree(self):
-        return tree.DecisionTreeRegressor(random_state=1)
+        return RandomForestRegressor(random_state=1, n_estimators=150)
+
+    def get_knn(self):
+        return KNeighborsRegressor(n_neighbors=15)
+
+    def get_knn_radius(self):
+        return RadiusNeighborsRegressor(radius=2.0)
 
     def train_svm(self, X, Y):
         return self.get_svm().fit(X, Y)
@@ -71,7 +79,6 @@ class ModelsTrainer:
 
         return self.mean_abs_error(reg_tree, self.X[-test_set_index : ], self.Y[-test_set_index : ])
 
-
     def cross_val_svm(self):
         clf = self.get_svm();
         scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
@@ -82,6 +89,16 @@ class ModelsTrainer:
         scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
         return scores
 
+    def cross_val_knn(self):
+        clf = self.get_knn();
+        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
+        return scores
+
+
+    def cross_val_knn_radius(self):
+        clf = self.get_knn_radius();
+        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
+        return scores
 
     def mean_squared_error(self, regressior, test_set, test_scores):
         prediction = regressior.predict(test_set)
