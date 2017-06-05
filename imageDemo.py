@@ -51,6 +51,7 @@ all_men = glob.glob(os.path.realpath('./dataset/men/*.jpg'))
 features = {}
 features_men = {}
 features_women = {}
+
 with open('features_men.json') as json_data:
     features_men = json.load(json_data, object_pairs_hook=OrderedDict)
 
@@ -95,3 +96,13 @@ models_trainer_men = ModelsTrainer(features_men, scores)
 output(models_trainer_mixed, "Mixed", len(features));
 output(models_trainer_women, "Women", len(features_women));
 output(models_trainer_men, "Men",  len(features_men));
+
+reg_tree = models_trainer_women.train_full_tree()
+
+reg_svm = models_trainer_women.train_full_svm()
+feature_extractor = FaceFeatureExtractor(args["image"])
+img_features = feature_extractor.get_face_features()
+
+# features_girl = models_trainer_women.scale_features(img_features['features_values']).reshape(1, -1)
+the_score = reg_tree.predict(img_features['features_values'])
+print(the_score)

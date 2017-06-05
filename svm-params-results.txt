@@ -36,6 +36,22 @@ Mixed Tree Cross Valid Error: 2.25 (+/- 1.05)
 Mixed SVM Cross Valid Error: 1.60 (+/- 1.01)
 Mixed KNN Cross Valid Error: 1.73 (+/- 0.78)
 
+
+
+
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.37 (+/- 0.78)
+Mixed SVM Cross Valid Error: 1.52 (+/- 0.82)
+Mixed KNN Cross Valid Error: 1.57 (+/- 0.52)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.36 (+/- 1.00)
+Women SVM Cross Valid Error: 1.46 (+/- 0.95)
+Women KNN Cross Valid Error: 1.71 (+/- 0.79)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.89 (+/- 1.20)
+Men SVM Cross Valid Error: 1.61 (+/- 1.32)
+Men KNN Cross Valid Error: 1.71 (+/- 0.80)
+
 Number of photos: 71
 Mixed Tree Cross Valid Error: 2.22 (+/- 1.30)
 Mixed SVM Cross Valid Error: 1.60 (+/- 0.66)
@@ -108,3 +124,89 @@ Number of photos: 35
 Men Tree Cross Valid Error: 1.53 (+/- 1.14)
 Men SVM Cross Valid Error: 1.24 (+/- 0.77)
 Men KNN Cross Valid Error: 1.46 (+/- 1.29)
+
+
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.56 (+/- 0.63)
+Mixed SVM Cross Valid Error: 1.61 (+/- 0.67)
+Mixed KNN Cross Valid Error: 1.66 (+/- 0.77)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.56 (+/- 1.21)
+Women SVM Cross Valid Error: 1.61 (+/- 1.08)
+Women KNN Cross Valid Error: 1.83 (+/- 0.97)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.57 (+/- 1.01)
+Men SVM Cross Valid Error: 1.37 (+/- 1.06)
+Men KNN Cross Valid Error: 1.49 (+/- 0.97)
+
+
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.54 (+/- 0.68)
+Mixed SVM Cross Valid Error: 1.61 (+/- 0.67)
+Mixed KNN Cross Valid Error: 1.66 (+/- 0.77)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.57 (+/- 1.18)
+Women SVM Cross Valid Error: 1.61 (+/- 1.08)
+Women KNN Cross Valid Error: 1.83 (+/- 0.97)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.59 (+/- 1.04)
+Men SVM Cross Valid Error: 1.37 (+/- 1.06)
+Men KNN Cross Valid Error: 1.49 (+/- 0.97)
+
+
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.46 (+/- 0.66)
+Mixed SVM Cross Valid Error: 1.51 (+/- 0.86)
+Mixed KNN Cross Valid Error: 1.58 (+/- 0.70)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.36 (+/- 1.05)
+Women SVM Cross Valid Error: 1.55 (+/- 1.21)
+Women KNN Cross Valid Error: 1.68 (+/- 1.13)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.82 (+/- 1.14)
+Men SVM Cross Valid Error: 1.55 (+/- 1.43)
+Men KNN Cross Valid Error: 1.64 (+/- 0.79)
+
+
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.22 (+/- 0.72)
+Mixed SVM Cross Valid Error: 1.37 (+/- 0.74)
+Mixed KNN Cross Valid Error: 1.48 (+/- 0.49)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.19 (+/- 0.75)
+Women SVM Cross Valid Error: 1.33 (+/- 0.84)
+Women KNN Cross Valid Error: 1.54 (+/- 0.53)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.76 (+/- 1.05)
+Men SVM Cross Valid Error: 1.57 (+/- 1.42)
+Men KNN Cross Valid Error: 1.73 (+/- 0.94)
+
+
+
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.42 (+/- 0.67)
+Mixed SVM Cross Valid Error: 1.39 (+/- 0.87)
+Mixed KNN Cross Valid Error: 1.73 (+/- 0.52)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.29 (+/- 0.93)
+Women SVM Cross Valid Error: 1.19 (+/- 0.88)
+Women KNN Cross Valid Error: 1.72 (+/- 0.69)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.98 (+/- 1.36)
+Men SVM Cross Valid Error: 2.12 (+/- 1.69)
+Men KNN Cross Valid Error: 1.94 (+/- 1.23)
+
+
+8
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.42 (+/- 0.67)
+Mixed SVM Cross Valid Error: 1.37 (+/- 0.90)
+Mixed KNN Cross Valid Error: 1.73 (+/- 0.52)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.29 (+/- 0.93)
+Women SVM Cross Valid Error: 1.07 (+/- 0.79)
+Women KNN Cross Valid Error: 1.72 (+/- 0.69)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.98 (+/- 1.36)
+Men SVM Cross Valid Error: 2.03 (+/- 1.85)
+Men KNN Cross Valid Error: 1.94 (+/- 1.23)

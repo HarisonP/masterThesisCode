@@ -12,5 +12,5 @@ filesSorted = sorted(files, key=lambda x: int(x.split('_')[0]))
 for filename in filesSorted:
         template[filename] = 0;
 
-with open('scores_template.txt', 'w') as outfile:
+with open('scores_template.json', 'w') as outfile:
     json.dump(template, outfile, indent=4, sort_keys=True)

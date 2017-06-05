@@ -9,6 +9,7 @@ class ScoresExtractor:
     def extract_average_scores(self):
         sum_of_scores = defaultdict(lambda: 0, {})
         average_scores = {}
+        print(len(self.filenames))
         for filename in self.filenames:
             with open(filename) as json_file:
                 next_scores = json.load(json_file)

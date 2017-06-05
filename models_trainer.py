@@ -8,18 +8,25 @@ from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.neighbors import RadiusNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn import preprocessing
+
 class ModelsTrainer:
     def __init__(self, features, scores):
+        self.min_max_scaler = preprocessing.MinMaxScaler()
 
         self.features_names = [value['features_names'] for key, value in features.items()][0]
         self.X = [value['features_values'] for key, value in features.items()]
+        self.X_scaled01 = self.min_max_scaler.fit_transform(self.X)
         self.Y = [scores[key] for key, value in features.items()]
 
     def get_svm(self):
-        return svm.SVR(kernel="poly", degree=1, gamma = 0.001)
+        return svm.SVR(kernel="linear", C = 1, epsilon = 0.01)
+        # return svm.SVR(kernel="poly", degree=1, gamma = 0.001, C = 1)
 
+    def scale_features(self, features):
+        return self.min_max_scaler.fit_transform(features)
     def get_tree(self):
-        return RandomForestRegressor(random_state=1, n_estimators=150)
+        return RandomForestRegressor(random_state=1, n_estimators=300)
 
     def get_knn(self):
         return KNeighborsRegressor(n_neighbors=15)
@@ -32,6 +39,12 @@ class ModelsTrainer:
 
     def train_regression_tree(self, X, Y):
         return self.get_tree().fit(X, Y)
+
+    def train_full_tree(self):
+        return self.train_regression_tree(self.X, self.Y)
+
+    def train_full_svm(self):
+        return self.train_svm(self.X_scaled01, self.Y)
 
     def print_regression_tree(self, reg_tree):
 
@@ -81,7 +94,8 @@ class ModelsTrainer:
 
     def cross_val_svm(self):
         clf = self.get_svm();
-        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
+        # print(self.X_scaled01)
+        scores = cross_val_score(clf, self.X_scaled01, self.Y, cv=10, scoring='neg_mean_absolute_error')
         return scores
 
     def cross_val_tree(self):
