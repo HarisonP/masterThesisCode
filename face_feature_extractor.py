@@ -6,6 +6,7 @@ import dlib
 import cv2
 import geometry_helper
 import face_extractor_constants as constants
+from sklearn.metrics import mean_squared_error
 
 class FaceFeatureExtractor:
 
@@ -68,7 +69,6 @@ class FaceFeatureExtractor:
     def add_feature(self, name, val):
         self.features['features_names'].append(name)
         self.features['features_values'].append(val);
-
 
     def extract_eyes_features(self):
         distance_between_pulips = geometry_helper.point_distance(self.left_pupils, self.rigth_pupils)
@@ -139,7 +139,6 @@ class FaceFeatureExtractor:
         self.add_feature("Checkbown width", self.__scale_distance(self.face_width - chin_width))
         self.add_feature("Checkbown width to face width", (self.face_width - chin_width) / self.face_width)
 
-
     def extract_eyebrows_features(self):
         # TODO use min between heights of the eyebrow points
         left_eyebrow_height = self.shape[constants.LEFT_EYEBROW_OUTER_POINT_INDEX][1] - self.shape[constants.LEFT_EYEBROW_HEIGHEST_POINT_INDEX][1]
@@ -174,7 +173,6 @@ class FaceFeatureExtractor:
         self.add_feature("Left nostril size", self.__scale_distance(left_nostril_size))
         self.add_feature("Right nostril size", self.__scale_distance(right_nostril_size))
         self.add_feature("Left nostril size to right nostril size", left_nostril_size / right_nostril_size)
-
 
     def extract_mouth_features(self):
         lower_lip_height = geometry_helper.point_distance(self.shape[constants.MOUTH_LOWEST_POINT_INDEX],
@@ -211,6 +209,24 @@ class FaceFeatureExtractor:
         self.add_feature("Right jaw size", self.__scale_distance(right_jaw_size))
         self.add_feature("Left checkbown height to left jaw size", left_checkbown_height / left_jaw_size)
         self.add_feature("Right checkbown height to right jaw size", right_checkbown_height / right_jaw_size)
+
+    def extract_symmetricity(self):
+        (x, y, w, h) = face_utils.rect_to_bb(self.rect)
+
+        left_face_rect = self.gray[y : h + y, x : x + int(w / 2)]
+        rigth_face_rect = self.gray[y : h + y, x + int(w / 2) : x + w]
+
+        if ( len(rigth_face_rect[0]) > len(left_face_rect[0])):
+            rigth_face_rect = [l[1:] for l in rigth_face_rect]
+        elif ( len(rigth_face_rect[0]) > len(left_face_rect[0])):
+            left_face_rect = [l[1:] for l in left_face_rect]
+
+        # print(len(left_face_rect[0]), len(rigth_face_rect[0]))
+        # print(mean_squared_error(left_face_rect, rigth_face_rect))
+
+        self.add_feature('Symmeticity',mean_squared_error(left_face_rect, rigth_face_rect) )
+        # cv2.imshow("Output", left_face_rect)
+        # cv2.imshow("Output", rigth_face_rect)
 
     def print_face_detected_with_shape(self):
         # loop over the face detections
@@ -262,6 +278,7 @@ class FaceFeatureExtractor:
         self.extract_mouth_features()
         self.extract_hair_color()
         self.extract_skintone_feature()
+        self.extract_symmetricity()
         return self.features
 
     def extract_hair_color(self):

@@ -210,3 +210,55 @@ Number of photos: 39
 Men Tree Cross Valid Error: 1.98 (+/- 1.36)
 Men SVM Cross Valid Error: 2.03 (+/- 1.85)
 Men KNN Cross Valid Error: 1.94 (+/- 1.23)
+
+
+Mixed scaled01 SVM Cross Valid Error: 1.35 (+/- 0.55)
+Mixed  PCA Reduced SVM Cross Valid Error: 1.58 (+/- 0.53)
+Mixed PCA reduced scaled01 SVM Cross Valid Error: 1.35 (+/- 0.54)
+Number of photos: 45
+Women scaled01 SVM Cross Valid Error: 1.13 (+/- 0.95)
+Women  PCA Reduced SVM Cross Valid Error: 1.47 (+/- 0.90)
+Women PCA reduced scaled01 SVM Cross Valid Error: 1.13 (+/- 0.93)
+Number of photos: 39
+Men scaled01 SVM Cross Valid Error: 1.98 (+/- 1.89)
+Men  PCA Reduced SVM Cross Valid Error: 1.80 (+/- 1.87)
+Men PCA reduced scaled01 SVM Cross Valid Error: 1.99 (+/- 1.92)
+
+Men Faces improved by PCA. => ???
+
+
+
+
+Number of photos: 83
+Mixed Tree Cross Valid Error: 1.38 (+/- 0.75)
+Mixed PCA reduced scaled01 Tree Corss Valid Error: 1.57 (+/- 0.88)
+Mixed KNN Cross Valid Error: 1.68 (+/- 0.61)
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.41 (+/- 0.69)
+Number of photos: 45
+Women Tree Cross Valid Error: 1.23 (+/- 0.83)
+Women PCA reduced scaled01 Tree Corss Valid Error: 1.37 (+/- 0.79)
+Women KNN Cross Valid Error: 1.65 (+/- 1.03)
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.25 (+/- 0.98)
+Number of photos: 39
+Men Tree Cross Valid Error: 1.86 (+/- 1.66)
+Men PCA reduced scaled01 Tree Corss Valid Error: 1.79 (+/- 1.45)
+Men KNN Cross Valid Error: 1.85 (+/- 1.44)
+Men PCA reduced scaled01 KNN Cross Valid Error: 1.83 (+/- 1.64)
+
+
+
+
+n_neighbors=5
+Mixed KNN Cross Valid Error: 1.49 (+/- 0.58)
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.42 (+/- 0.65)
+Number of photos: 45
+Women KNN Cross Valid Error: 1.55 (+/- 0.44)
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.05 (+/- 0.64)
+Number of photos: 39
+Men KNN Cross Valid Error: 1.84 (+/- 1.38)
+Men PCA reduced scaled01 KNN Cross Valid Error: 1.98 (+/- 1.31)
+
+
+n-neigbours super iproved by PCA. with n = 5  above !
+
+all others algorithms are not improved by PCA. SVM is achived by pca-ing the scaled01 features.
