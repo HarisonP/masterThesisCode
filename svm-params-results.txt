@@ -262,3 +262,6 @@ Men PCA reduced scaled01 KNN Cross Valid Error: 1.98 (+/- 1.31)
 n-neigbours super iproved by PCA. with n = 5  above !
 
 all others algorithms are not improved by PCA. SVM is achived by pca-ing the scaled01 features.
+
+
+cross_val_reduced_scaled_features_knn is the right way to use pca with knn!!!!

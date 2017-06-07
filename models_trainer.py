@@ -31,7 +31,7 @@ class ModelsTrainer:
         # this one is just like the svm
         # the third input
         # PCA 2
-        FEATURE_TRESHHOLD = 5.0e-03
+        FEATURE_TRESHHOLD = 4.0e-03
         pca = PCA()
         pca.fit(self.X_scaled01)
         # self.features_above_tresh_hold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
