@@ -61,9 +61,14 @@ class ModelsTrainer:
 
     def get_svm(self):
         # 1.07 ( 0.81)
-        return svm.SVR(kernel="linear", C = 1, epsilon = 0.01)
-        # Women SVM Cross Valid Error: 1.03 (+/- 0.77)
-        # return svm.SVR(kernel="poly", degree=2, gamma = 0.2, C = 1, epsilon = 0.01, coef0=0.7, tol=1)
+        # the best for score_avr
+        # return svm.SVR(kernel="linear", C = 1, epsilon = 0.01)
+
+        # return svm.SVR(kernel="linear", C = 1, epsilon = 0.01)
+
+
+        # best for scores_scaled
+        return svm.SVR(kernel="poly", degree=1, gamma = 1, C = 1, epsilon = 0.01)
 
     def scale_features(self, features):
         return self.min_max_scaler.transform(features)

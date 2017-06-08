@@ -40,26 +40,6 @@ class ScoresExtractor:
 
         return sum_of_scores
 
-    def extract_z_scaled_average(self):
-        #
-        sum_of_scores = self.get_z_normlized_sum_of_scores()
-        average_scores = {}
-
-        for key, value in sum_of_scores.items():
-            average_scores[key] = value / self.number_of_scores
-
-
-        average_scores_row_labels = np.array([item[0] for item in average_scores.items()])
-        average_scores_row = np.array([item[1] for item in average_scores.items()])
-
-        min_max_scaler = preprocessing.MinMaxScaler(feature_range = (1, 10))
-        average_scores_row_scaled = min_max_scaler.fit_transform(average_scores_row.transpose())
-
-        for index, key in enumerate(average_scores_row_labels):
-            average_scores[key] = average_scores_row_scaled[index]
-
-        return average_scores
-
     def extract_z_scaled(self):
         sum_of_scores = self.get_z_normlized_sum_of_scores()
 

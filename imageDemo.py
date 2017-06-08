@@ -30,51 +30,50 @@ def output(models_trainer, prefix, dataset_size):
     print("Number of photos:", dataset_size)
     tree_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_tree()])
 
-    tree_ada_boost = np.array([math.fabs(s) for s in models_trainer.cross_val_ada_boost_tree()])
-    tree_reduced_scaled_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_tree()])
+    # tree_ada_boost = np.array([math.fabs(s) for s in models_trainer.cross_val_ada_boost_tree()])
+    # tree_reduced_scaled_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_tree()])
     # THE BEST OF TREE:
-    print(prefix, "Tree Cross Valid Error: %0.2f (+/- %0.2f)" % (tree_scores.mean(), tree_scores.std() * 2))
+    # print(prefix, "Tree Cross Valid Error: %0.2f (+/- %0.2f)" % (tree_scores.mean(), tree_scores.std() * 2))
 
-    print(prefix, "PCA reduced scaled01 Tree Corss Valid Error: %0.2f (+/- %0.2f)" % (tree_reduced_scaled_scores.mean(), tree_reduced_scaled_scores.std() * 2))
-    print(prefix, "Tree Ada Boost Valid Error: %0.2f (+/- %0.2f)" % (tree_ada_boost.mean(), tree_ada_boost.std() * 2))
+    # print(prefix, "PCA reduced scaled01 Tree Corss Valid Error: %0.2f (+/- %0.2f)" % (tree_reduced_scaled_scores.mean(), tree_reduced_scaled_scores.std() * 2))
+    # print(prefix, "Tree Ada Boost Valid Error: %0.2f (+/- %0.2f)" % (tree_ada_boost.mean(), tree_ada_boost.std() * 2))
 
     # print(tree_scores)
     # print(models_trainer.abs_error_svm())
 
     svm_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_scaled01_svm()])
-    svm_pca_reduced_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_pca_features_svm()])
-    svm_unscaled = np.array([math.fabs(s) for s in models_trainer.cross_val_unscaled_svm()])
-    svm_reduced_scaled = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_svm()])
+    # svm_pca_reduced_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_pca_features_svm()])
+    # svm_unscaled = np.array([math.fabs(s) for s in models_trainer.cross_val_unscaled_svm()])
+    # svm_reduced_scaled = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_svm()])
 
-    svm_reduced = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_features_svm()])
-    svm_scores_ada_boost = np.array([math.fabs(s) for s in models_trainer.cross_val_ada_boost_svm()])
+    # svm_reduced = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_features_svm()])
+    # svm_scores_ada_boost = np.array([math.fabs(s) for s in models_trainer.cross_val_ada_boost_svm()])
 
     # print(svm_scores)
     # THE BEST OF SVM:
     print(prefix, "scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_scores.mean(), svm_scores.std() * 2))
 
-    print(prefix, "PCA Reduced SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_pca_reduced_scores.mean(), svm_pca_reduced_scores.std() * 2))
+    # print(prefix, "PCA Reduced SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_pca_reduced_scores.mean(), svm_pca_reduced_scores.std() * 2))
 
-    print(prefix, "PCA reduced scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_reduced_scaled.mean(), svm_reduced_scaled.std() * 2))
-    print(prefix, "reduced scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_reduced.mean(), svm_reduced.std() * 2))
-    print(prefix, "scaled01 SVM Ada Boost Valid Error: %0.2f (+/- %0.2f)" % (svm_scores_ada_boost.mean(), svm_scores_ada_boost.std() * 2))
+    # print(prefix, "PCA reduced scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_reduced_scaled.mean(), svm_reduced_scaled.std() * 2))
+    # print(prefix, "reduced scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_reduced.mean(), svm_reduced.std() * 2))
+    # print(prefix, "scaled01 SVM Ada Boost Valid Error: %0.2f (+/- %0.2f)" % (svm_scores_ada_boost.mean(), svm_scores_ada_boost.std() * 2))
 
 
 
-    knn_score = np.array([math.fabs(s) for s in models_trainer.cross_val_knn()])
+    # knn_score = np.array([math.fabs(s) for s in models_trainer.cross_val_knn()])
     knn_reduced_scaled_score = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_knn()])
-    knn_reduced = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_features_svm()])
+    # knn_reduced = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_features_svm()])
     # print(knn_score)
     # print(prefix, "KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_score.mean(), knn_score.std() * 2))
     # THE BEST OF KNN
-    print(prefix, "PCA reduced scaled01 KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_reduced_scaled_score.mean(), knn_reduced_scaled_score.std() * 2))
-    print(prefix, "reduced scaled01 KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_reduced.mean(), knn_reduced.std() * 2))
+    # print(prefix, "PCA reduced scaled01 KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_reduced_scaled_score.mean(), knn_reduced_scaled_score.std() * 2))
+    # print(prefix, "reduced scaled01 KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_reduced.mean(), knn_reduced.std() * 2))
 
 # image_features_demo()
 
 scores_extractor = ScoresExtractor( glob.glob(os.path.realpath('./scores/*.txt')))
 scores_avr = scores_extractor.extract_average_scores()
-scores_scaled_average = scores_extractor.extract_z_scaled_average()
 scores_scaled = scores_extractor.extract_z_scaled()
 # print(scores_avr, scores_scaled)
 
@@ -135,8 +134,7 @@ def train_3_models(feature, scores, prefix):
 
     print("End ======================= End")
 
-# train_3_models(features, scores_avr, "Scores Average")
-# train_3_models(features, scores_scaled_average, "Scores Z-scaled Average")
+train_3_models(features, scores_avr, "Scores Average")
 train_3_models(features, scores_scaled, "Scores Z-scaled")
 
 # TODO define method for this action.
