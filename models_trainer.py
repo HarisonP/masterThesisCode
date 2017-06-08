@@ -8,8 +8,10 @@ from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.neighbors import RadiusNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
+from sklearn.ensemble import AdaBoostRegressor
 
 class ModelsTrainer:
     def __init__(self, features, scores):
@@ -30,6 +32,7 @@ class ModelsTrainer:
     def pca_and_scale_X_scaled(self):
         # this one is just like the svm
         # the third input
+        # this is the right one for knn
         # PCA 2
         FEATURE_TRESHHOLD = 4.0e-03
         pca = PCA()
@@ -37,7 +40,7 @@ class ModelsTrainer:
         # self.features_above_tresh_hold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
 
         pca.n_components = len(np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0])
-        print(pca.n_components)
+        # print(pca.n_components)
 
         self.X_pca_reduced_scaled = pca.fit_transform(self.X_scaled01)
 
@@ -65,14 +68,14 @@ class ModelsTrainer:
     def scale_features(self, features):
         return self.min_max_scaler.transform(features)
 
+    def get_ada_boost(self, clf, n_estimators):
+        return AdaBoostRegressor(n_estimators=n_estimators, base_estimator=clf, loss="square")
+
     def get_tree(self):
         return RandomForestRegressor(random_state=1, n_estimators=300)
 
     def get_knn(self):
-        return KNeighborsRegressor(n_neighbors=5)
-
-    def get_knn_radius(self):
-        return RadiusNeighborsRegressor(radius=2.0)
+        return KNeighborsRegressor(n_neighbors=5, weights="uniform", p=2, algorithm="brute")
 
     def train_svm(self, X, Y):
         return self.get_svm().fit(X, Y)
@@ -99,67 +102,43 @@ class ModelsTrainer:
         graph = pydotplus.graph_from_dot_data(dot_data)
         graph.write_pdf("tree.pdf")
 
-    def cross_val_scaled01_svm(self):
-        clf = self.get_svm();
+    def train_cross_val(self, train_set, clf):
         # print(self.X_scaled01)
-        scores = cross_val_score(clf, self.X_scaled01, self.Y, cv=10, scoring='neg_mean_absolute_error')
+        scores = cross_val_score(clf, train_set, self.Y, cv=10, scoring='neg_mean_absolute_error')
         return scores
+
+    def cross_val_scaled01_svm(self):
+        return self.train_cross_val(self.X_scaled01, self.get_svm())
 
     def cross_val_unscaled_svm(self):
-        clf = self.get_svm();
-        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X, self.get_svm())
 
     def cross_val_reduced_pca_features_svm(self):
-        clf = self.get_svm();
-        # print(self.X_pca_reduced)
-        scores = cross_val_score(clf, self.X_pca_reduced, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X_pca_reduced, self.get_svm())
 
     def cross_val_reduced_scaled_features_svm(self):
-        clf = self.get_svm();
-        scores = cross_val_score(clf, self.X_pca_reduced_scaled, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X_pca_reduced_scaled, self.get_svm())
 
     def cross_val_reduced_features_svm(self):
-        clf = self.get_svm();
-        scores = cross_val_score(clf, self.X_reduced, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X_reduced, self.get_svm())
+
+    def cross_val_ada_boost_svm(self):
+        return self.train_cross_val(self.X_scaled01, self.get_ada_boost(self.get_svm(), 150))
 
     def cross_val_tree(self):
-        clf = self.get_tree();
-        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X, self.get_tree())
 
     def cross_val_reduced_scaled_features_tree(self):
-        clf = self.get_tree();
-        scores = cross_val_score(clf, self.X_pca_reduced_scaled, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X_pca_reduced_scaled, self.get_tree())
+
+    def cross_val_ada_boost_tree(self):
+        return self.train_cross_val(self.X, self.get_ada_boost(None, 150))
 
     def cross_val_knn(self):
-        clf = self.get_knn();
-        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X, self.get_knn())
 
     def cross_val_reduced_scaled_features_knn(self):
-        clf = self.get_knn();
-        scores = cross_val_score(clf, self.X_pca_reduced_scaled, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
+        return self.train_cross_val(self.X_pca_reduced_scaled, self.get_knn())
 
     def cross_val_reduced_features_knn(self):
-        clf = self.get_knn();
-        scores = cross_val_score(clf, self.X_reduced, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
-
-    def cross_val_knn_radius(self):
-        clf = self.get_knn_radius();
-        scores = cross_val_score(clf, self.X, self.Y, cv=10, scoring='neg_mean_absolute_error')
-        return scores
-
-    def mean_squared_error(self, regressior, test_set, test_scores):
-        prediction = regressior.predict(test_set)
-        return mean_squared_error(test_scores, prediction)
-
-    def mean_abs_error(self, regressior,  test_set, test_scores):
-        prediction = regressior.predict(test_set)
-        return mean_absolute_error(test_scores, prediction)
+        return self.train_cross_val(self.X_reduced, self.get_knn())
