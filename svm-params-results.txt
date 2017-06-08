@@ -265,3 +265,29 @@ all others algorithms are not improved by PCA. SVM is achived by pca-ing the sca
 
 
 cross_val_reduced_scaled_features_knn is the right way to use pca with knn!!!!
+
+
+knn  return KNeighborsRegressor(n_neighbors=5, weights="uniform")
+
+
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.33 (+/- 0.63)
+Number of photos: 45
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.11 (+/- 0.64)
+Number of photos: 39
+Men PCA reduced scaled01 KNN Cross Valid Error: 1.68 (+/- 1.27)
+
+
+return KNeighborsRegressor(n_neighbors=5, weights="weights")
+
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.33 (+/- 0.64)
+Number of photos: 45
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.10 (+/- 0.67)
+Number of photos: 39
+Men PCA reduced scaled01 KNN Cross Valid Error: 1.69 (+/- 1.30)
+
+
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.33 (+/- 0.63)
+Number of photos: 45
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.11 (+/- 0.64)
+Number of photos: 39
+Men PCA reduced scaled01 KNN Cross Valid Error: 1.68 (+/- 1.27)
