@@ -291,3 +291,84 @@ Number of photos: 45
 Women PCA reduced scaled01 KNN Cross Valid Error: 1.11 (+/- 0.64)
 Number of photos: 39
 Men PCA reduced scaled01 KNN Cross Valid Error: 1.68 (+/- 1.27)
+
+
+
+Scores Average
+Start ======================= Start
+Number of photos: 92
+Mixed Tree Cross Valid Error: 1.72 (+/- 0.90)
+Mixed scaled01 SVM Cross Valid Error: 1.56 (+/- 0.71)
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.69 (+/- 0.99)
+Mixed BaseLine Cross Valid Error: 2.05 (+/- 0.73)
+Number of photos: 48
+Women Tree Cross Valid Error: 1.48 (+/- 1.08)
+Women scaled01 SVM Cross Valid Error: 1.28 (+/- 1.01)
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.13 (+/- 0.77)
+Women BaseLine Cross Valid Error: 1.97 (+/- 0.97)
+Number of photos: 43
+Men Tree Cross Valid Error: 2.18 (+/- 1.32)
+Men scaled01 SVM Cross Valid Error: 2.34 (+/- 1.12)
+Men PCA reduced scaled01 KNN Cross Valid Error: 2.01 (+/- 0.91)
+Men BaseLine Cross Valid Error: 1.99 (+/- 1.30)
+End ======================= End
+
+Scores Z-scaled
+Start ======================= Start
+Number of photos: 92
+Mixed Tree Cross Valid Error: 1.40 (+/- 0.57)
+Mixed scaled01 SVM Cross Valid Error: 1.55 (+/- 0.39)
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.51 (+/- 0.64)
+Mixed BaseLine Cross Valid Error: 1.87 (+/- 0.51)
+Number of photos: 48
+Women Tree Cross Valid Error: 1.35 (+/- 0.58)
+Women scaled01 SVM Cross Valid Error: 1.54 (+/- 1.02)
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.14 (+/- 0.43)
+Women BaseLine Cross Valid Error: 1.87 (+/- 0.64)
+Number of photos: 43
+Men Tree Cross Valid Error: 1.73 (+/- 1.38)
+Men scaled01 SVM Cross Valid Error: 2.03 (+/- 1.53)
+Men PCA reduced scaled01 KNN Cross Valid Error: 1.80 (+/- 1.52)
+Men BaseLine Cross Valid Error: 1.72 (+/- 1.19)
+End ======================= End
+
+
+
+
+Scores Average
+Start ======================= Start
+Number of photos: 99
+Mixed Tree Cross Valid Error: 2.01 (+/- 1.11)
+Mixed scaled01 SVM Cross Valid Error: 1.91 (+/- 0.88)
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 2.11 (+/- 0.80)
+Mixed BaseLine Cross Valid Error: 2.26 (+/- 0.99)
+Number of photos: 53
+Women Tree Cross Valid Error: 1.91 (+/- 1.00)
+Women scaled01 SVM Cross Valid Error: 1.90 (+/- 1.33)
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.88 (+/- 0.69)
+Women BaseLine Cross Valid Error: 2.36 (+/- 1.38)
+Number of photos: 45
+Men Tree Cross Valid Error: 2.12 (+/- 1.53)
+Men scaled01 SVM Cross Valid Error: 2.13 (+/- 1.53)
+Men PCA reduced scaled01 KNN Cross Valid Error: 2.20 (+/- 1.64)
+Men BaseLine Cross Valid Error: 2.04 (+/- 1.45)
+End ======================= End
+
+Scores Z-scaled
+Start ======================= Start
+Number of photos: 99
+Mixed Tree Cross Valid Error: 1.41 (+/- 0.80)
+Mixed scaled01 SVM Cross Valid Error: 1.48 (+/- 0.78)
+Mixed PCA reduced scaled01 KNN Cross Valid Error: 1.53 (+/- 0.92)
+Mixed BaseLine Cross Valid Error: 1.76 (+/- 0.82)
+Number of photos: 53
+Women Tree Cross Valid Error: 1.25 (+/- 0.93)
+Women scaled01 SVM Cross Valid Error: 1.38 (+/- 1.02)
+Women PCA reduced scaled01 KNN Cross Valid Error: 1.17 (+/- 0.73)
+Women BaseLine Cross Valid Error: 1.76 (+/- 1.22)
+Number of photos: 45
+Men Tree Cross Valid Error: 1.81 (+/- 1.22)
+Men scaled01 SVM Cross Valid Error: 1.98 (+/- 1.30)
+Men PCA reduced scaled01 KNN Cross Valid Error: 1.76 (+/- 1.47)
+Men BaseLine Cross Valid Error: 1.65 (+/- 1.14)
+End ======================= End

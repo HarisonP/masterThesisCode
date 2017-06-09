@@ -12,6 +12,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
 from sklearn.ensemble import AdaBoostRegressor
+from sklearn.dummy import DummyRegressor
 
 class ModelsTrainer:
     def __init__(self, features, scores):
@@ -62,13 +63,15 @@ class ModelsTrainer:
     def get_svm(self):
         # 1.07 ( 0.81)
         # the best for score_avr
-        # return svm.SVR(kernel="linear", C = 1, epsilon = 0.01)
+        return svm.SVR(kernel="linear", C = 1, epsilon = 0.1)
 
         # return svm.SVR(kernel="linear", C = 1, epsilon = 0.01)
 
 
         # best for scores_scaled
-        return svm.SVR(kernel="poly", degree=1, gamma = 1, C = 1, epsilon = 0.01)
+        # return svm.SVR(kernel="poly", degree=1, gamma = 1, C = 1, epsilon = 0.01)
+    def get_baseline(self):
+        return DummyRegressor(strategy='mean')
 
     def scale_features(self, features):
         return self.min_max_scaler.transform(features)
@@ -80,8 +83,10 @@ class ModelsTrainer:
         return RandomForestRegressor(random_state=1, n_estimators=300)
 
     def get_knn(self):
-        return KNeighborsRegressor(n_neighbors=5, weights="uniform", p=2, algorithm="brute")
+        # the best for score_avr
+        # return KNeighborsRegressor(n_neighbors=5, weights="uniform", p=2, algorithm="brute")
 
+        return KNeighborsRegressor(n_neighbors=5, weights="uniform", p=2, algorithm="brute")
     def train_svm(self, X, Y):
         return self.get_svm().fit(X, Y)
 
@@ -121,11 +126,18 @@ class ModelsTrainer:
     def cross_val_reduced_pca_features_svm(self):
         return self.train_cross_val(self.X_pca_reduced, self.get_svm())
 
+    def cross_val_reduced_pca_features_svm(self):
+        return self.train_cross_val(self.X_pca_reduced, self.get_svm())
+
+
     def cross_val_reduced_scaled_features_svm(self):
         return self.train_cross_val(self.X_pca_reduced_scaled, self.get_svm())
 
     def cross_val_reduced_features_svm(self):
         return self.train_cross_val(self.X_reduced, self.get_svm())
+
+    def cross_val_baseline(self):
+        return self.train_cross_val(self.X_reduced, self.get_baseline())
 
     def cross_val_ada_boost_svm(self):
         return self.train_cross_val(self.X_scaled01, self.get_ada_boost(self.get_svm(), 150))

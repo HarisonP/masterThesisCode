@@ -33,13 +33,12 @@ def output(models_trainer, prefix, dataset_size):
     # tree_ada_boost = np.array([math.fabs(s) for s in models_trainer.cross_val_ada_boost_tree()])
     # tree_reduced_scaled_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_tree()])
     # THE BEST OF TREE:
-    # print(prefix, "Tree Cross Valid Error: %0.2f (+/- %0.2f)" % (tree_scores.mean(), tree_scores.std() * 2))
+    print(prefix, "Tree Cross Valid Error: %0.2f (+/- %0.2f)" % (tree_scores.mean(), tree_scores.std() * 2))
 
     # print(prefix, "PCA reduced scaled01 Tree Corss Valid Error: %0.2f (+/- %0.2f)" % (tree_reduced_scaled_scores.mean(), tree_reduced_scaled_scores.std() * 2))
     # print(prefix, "Tree Ada Boost Valid Error: %0.2f (+/- %0.2f)" % (tree_ada_boost.mean(), tree_ada_boost.std() * 2))
 
     # print(tree_scores)
-    # print(models_trainer.abs_error_svm())
 
     svm_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_scaled01_svm()])
     # svm_pca_reduced_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_pca_features_svm()])
@@ -64,12 +63,14 @@ def output(models_trainer, prefix, dataset_size):
     # knn_score = np.array([math.fabs(s) for s in models_trainer.cross_val_knn()])
     knn_reduced_scaled_score = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_knn()])
     # knn_reduced = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_features_svm()])
-    # print(knn_score)
+    # print(knn_reduced_scaled_score)
     # print(prefix, "KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_score.mean(), knn_score.std() * 2))
     # THE BEST OF KNN
-    # print(prefix, "PCA reduced scaled01 KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_reduced_scaled_score.mean(), knn_reduced_scaled_score.std() * 2))
+    print(prefix, "PCA reduced scaled01 KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_reduced_scaled_score.mean(), knn_reduced_scaled_score.std() * 2))
     # print(prefix, "reduced scaled01 KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_reduced.mean(), knn_reduced.std() * 2))
 
+    base_line_scores = np.array([math.fabs(s) for s in models_trainer.cross_val_baseline()])
+    print(prefix, "BaseLine Cross Valid Error: %0.2f (+/- %0.2f)" % (base_line_scores.mean(), base_line_scores.std() * 2))
 # image_features_demo()
 
 scores_extractor = ScoresExtractor( glob.glob(os.path.realpath('./scores/*.txt')))
@@ -92,18 +93,16 @@ def load_features_from_file(features_filename):
 
 def extract_and_load_to_file(features, features_men, features_women):
     for filename in all_images:
+        print(filename)
         next_feature_extractor = FaceFeatureExtractor(filename)
         features[os.path.basename(filename)] = next_feature_extractor.get_face_features()
 
     for filename in all_women:
-        next_feature_extractor = FaceFeatureExtractor(filename)
-        features_women[os.path.basename(filename)] = next_feature_extractor.get_face_features()
+        features_women[os.path.basename(filename)] = features[os.path.basename(filename)]
 
 
     for filename in all_men:
-        next_feature_extractor = FaceFeatureExtractor(filename)
-        features_men[os.path.basename(filename)] = next_feature_extractor.get_face_features()
-
+        features_men[os.path.basename(filename)] = features[os.path.basename(filename)]
 
     with open('features_women.json', 'w') as outfile:
         json.dump(features_women, outfile)
