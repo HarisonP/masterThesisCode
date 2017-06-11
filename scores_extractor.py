@@ -21,7 +21,7 @@ class ScoresExtractor:
             average_scores[key] = value / self.number_of_scores
         return average_scores
 
-    def get_z_normlized_sum_of_scores(self):
+    def get_z_scaled_sum_of_scores(self):
         sum_of_scores = defaultdict(lambda: 0, {})
 
 
@@ -41,7 +41,7 @@ class ScoresExtractor:
         return sum_of_scores
 
     def extract_z_scaled(self):
-        sum_of_scores = self.get_z_normlized_sum_of_scores()
+        sum_of_scores = self.get_z_scaled_sum_of_scores()
 
         sum_of_scores_row_labels = np.array([item[0] for item in sum_of_scores.items()])
         sum_of_scores_row = np.array([item[1] for item in sum_of_scores.items()])
@@ -53,3 +53,11 @@ class ScoresExtractor:
             sum_of_scores[key] = sum_of_scores_row_scaled[index]
 
         return sum_of_scores
+
+    def get_z_scaled_average(self):
+        sum_of_scores = self.get_z_scaled_sum_of_scores()
+        average_scores = {}
+        for key, value in sum_of_scores.items():
+            average_scores[key] = value / self.number_of_scores
+
+        return average_scores

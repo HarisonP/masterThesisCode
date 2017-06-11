@@ -7,6 +7,7 @@ import cv2
 from face_feature_extractor import FaceFeatureExtractor
 from scores_extractor import ScoresExtractor
 from models_trainer import ModelsTrainer
+from personal_models_trainer import PersonalModelTrainer
 import glob
 import os
 import json
@@ -49,20 +50,22 @@ def output(models_trainer, prefix, dataset_size):
     # svm_scores_ada_boost = np.array([math.fabs(s) for s in models_trainer.cross_val_ada_boost_svm()])
 
     # print(svm_scores)
+
     # THE BEST OF SVM:
     print(prefix, "scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_scores.mean(), svm_scores.std() * 2))
 
     # print(prefix, "PCA Reduced SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_pca_reduced_scores.mean(), svm_pca_reduced_scores.std() * 2))
 
     # print(prefix, "PCA reduced scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_reduced_scaled.mean(), svm_reduced_scaled.std() * 2))
+
     # print(prefix, "reduced scaled01 SVM Cross Valid Error: %0.2f (+/- %0.2f)" % (svm_reduced.mean(), svm_reduced.std() * 2))
     # print(prefix, "scaled01 SVM Ada Boost Valid Error: %0.2f (+/- %0.2f)" % (svm_scores_ada_boost.mean(), svm_scores_ada_boost.std() * 2))
 
 
 
-    # knn_score = np.array([math.fabs(s) for s in models_trainer.cross_val_knn()])
+    knn_score = np.array([math.fabs(s) for s in models_trainer.cross_val_knn()])
     knn_reduced_scaled_score = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_scaled_features_knn()])
-    # knn_reduced = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_features_svm()])
+    knn_reduced = np.array([math.fabs(s) for s in models_trainer.cross_val_reduced_features_svm()])
     # print(knn_reduced_scaled_score)
     # print(prefix, "KNN Cross Valid Error: %0.2f (+/- %0.2f)" % (knn_score.mean(), knn_score.std() * 2))
     # THE BEST OF KNN
@@ -76,6 +79,7 @@ def output(models_trainer, prefix, dataset_size):
 scores_extractor = ScoresExtractor( glob.glob(os.path.realpath('./scores/*.txt')))
 scores_avr = scores_extractor.extract_average_scores()
 scores_scaled = scores_extractor.extract_z_scaled()
+scores_z_avr = scores_extractor.get_z_scaled_average()
 # print(scores_avr, scores_scaled)
 
 all_images = glob.glob(os.path.realpath('./dataset/*.jpg'))
@@ -133,15 +137,60 @@ def train_3_models(feature, scores, prefix):
 
     print("End ======================= End")
 
-train_3_models(features, scores_avr, "Scores Average")
-train_3_models(features, scores_scaled, "Scores Z-scaled")
+# train_3_models(features, scores_avr, "Scores Average")
+# train_3_models(features, scores_scaled, "Scores Z-scaled")
+# train_3_models(features, scores_z_avr, "Scores Z-scaled Avrg")
+
+
 
 # TODO define method for this action.
-# reg_tree = models_trainer_women.train_full_tree()
-# reg_svm = models_trainer_women.train_full_svm()
-# feature_extractor = FaceFeatureExtractor(args["image"])
-# img_features = feature_extractor.get_face_features()
+def predict_score(features, scores):
 
-# features_girl = models_trainer_women.scale_features(img_features['features_values'])
-# the_score = reg_tree.predict(img_features['features_values'])
-# print(the_score)
+    models_trainer_mixed = ModelsTrainer(features, scores)
+    knn_predictor = models_trainer_mixed.train_scaled_fetures_knn()
+    reg_tree = models_trainer_mixed.train_full_tree()
+    svm_01 = models_trainer_mixed.train_scaled01_full_svm()
+
+    feature_extractor = FaceFeatureExtractor(args["image"])
+    img_features = feature_extractor.get_face_features()
+
+    features_girl_scaled = models_trainer_mixed.scale_features(img_features['features_values'])
+    features_girl_filtered = models_trainer_mixed.filter_scaled_pca_features(features_girl_scaled)
+
+    knn_score = knn_predictor.predict(features_girl_filtered)
+    tree_score = reg_tree.predict(img_features['features_values'])
+    svm_score = svm_01.predict(features_girl_scaled)
+
+    print("KNN: " ,knn_score)
+    print("Tree: " ,tree_score)
+    print("SVM: ", svm_score)
+
+
+# predict_score(features_women, scores_scaled)
+def train_personal_model(features, scores):
+    validation_imgs = glob.glob(os.path.realpath('./dataset/validation_set/*.jpg'))
+    validation_imgs = [os.path.basename(img) for img in validation_imgs]
+    features_filtered = {}
+    features_for_validation = {}
+    scores_extractor = ScoresExtractor( glob.glob(os.path.realpath('./scores/personal_scores/*.txt')))
+
+    for img in features.items():
+        if not(img[0] in validation_imgs):
+            features_filtered[img[0]] = img[1]
+        else:
+            features_for_validation[img[0]] = img[1]
+
+    models_trainer_mixed = ModelsTrainer(features, scores)
+    reg_tree = models_trainer_mixed.train_full_tree()
+    personal_predictor = PersonalModelTrainer(reg_tree, scores_extractor.get_z_scaled_average(), features_filtered)
+    personal_predictor.train_personal_tree_predictor()
+
+    test_scores = [scores[key] for key, value in features_for_validation.items()]
+    test_features = [value['features_values'] for key, value in features_for_validation.items()]
+
+    print("Baseline:", personal_predictor.base_accuracy(test_features, test_scores))
+    print("Forest:", personal_predictor.forest_accuracy(test_features, test_scores))
+
+
+
+train_personal_model(features, scores_z_avr)

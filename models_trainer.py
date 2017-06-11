@@ -38,7 +38,9 @@ class ModelsTrainer:
         FEATURE_TRESHHOLD = 4.0e-03
         pca = PCA()
         pca.fit(self.X_scaled01)
-        # self.features_above_tresh_hold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
+
+        self.scaled_features_above_tresh_hold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
+
 
         pca.n_components = len(np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0])
         # print(pca.n_components)
@@ -51,6 +53,7 @@ class ModelsTrainer:
         FEATURE_TRESHHOLD = 0.5
         pca = PCA()
         pca.fit(self.X)
+
         self.features_above_tresh_hold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
         pca.n_components = len( np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0])
 
@@ -70,11 +73,18 @@ class ModelsTrainer:
 
         # best for scores_scaled
         # return svm.SVR(kernel="poly", degree=1, gamma = 1, C = 1, epsilon = 0.01)
+
     def get_baseline(self):
         return DummyRegressor(strategy='mean')
 
     def scale_features(self, features):
         return self.min_max_scaler.transform(features)
+
+    def filter_scaled_pca_features(self, features):
+        return [features[i] for i in self.scaled_features_above_tresh_hold]
+
+    def filter_pca_features(self, features):
+        return [features[i] for i in self.features_above_tresh_hold]
 
     def get_ada_boost(self, clf, n_estimators):
         return AdaBoostRegressor(n_estimators=n_estimators, base_estimator=clf, loss="square")
@@ -85,13 +95,13 @@ class ModelsTrainer:
     def get_knn(self):
         # the best for score_avr
         # return KNeighborsRegressor(n_neighbors=5, weights="uniform", p=2, algorithm="brute")
+        return KNeighborsRegressor(n_neighbors=5, weights="distance", p=2, algorithm="brute")
 
-        return KNeighborsRegressor(n_neighbors=5, weights="uniform", p=2, algorithm="brute")
     def train_svm(self, X, Y):
         return self.get_svm().fit(X, Y)
 
     def train_scaled_svm(self, X, Y):
-        return self.get_svm().fit(X_scaled01, Y)
+        return self.get_svm().fit(self.X_scaled01, Y)
 
     def train_regression_tree(self, X, Y):
         return self.get_tree().fit(X, Y)
@@ -101,6 +111,9 @@ class ModelsTrainer:
 
     def train_full_svm(self):
         return self.train_svm(self.X, self.Y)
+
+    def train_scaled01_full_svm(self):
+        return self.train_svm(self.X_scaled01, self.Y)
 
     def print_regression_tree(self, reg_tree):
 
@@ -114,6 +127,7 @@ class ModelsTrainer:
 
     def train_cross_val(self, train_set, clf):
         # print(self.X_scaled01)
+        # scoring='neg_mean_absolute_error'
         scores = cross_val_score(clf, train_set, self.Y, cv=10, scoring='neg_mean_absolute_error')
         return scores
 
@@ -156,6 +170,9 @@ class ModelsTrainer:
 
     def cross_val_reduced_scaled_features_knn(self):
         return self.train_cross_val(self.X_pca_reduced_scaled, self.get_knn())
+
+    def train_scaled_fetures_knn(self):
+        return self.get_knn().fit(self.X_pca_reduced_scaled, self.Y)
 
     def cross_val_reduced_features_knn(self):
         return self.train_cross_val(self.X_reduced, self.get_knn())
