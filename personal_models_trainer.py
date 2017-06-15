@@ -21,6 +21,8 @@ class PersonalModelTrainer:
         self.Y = [self.__create_classes(val) for val in self.Y]
 
         self.train_base_lane()
+
+
     def __create_classes(self, regression_score):
         SCORE_BORDED = 0.4
         if (regression_score < -SCORE_BORDED):

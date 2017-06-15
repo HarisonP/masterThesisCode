@@ -25,7 +25,7 @@ def image_features_demo():
     feature_extractor.get_face_features()
     feature_extractor.print_face_detected_with_shape()
     feature_extractor.print_features()
-
+image_features_demo()
 
 def output(models_trainer, prefix, dataset_size):
     print("Number of photos:", dataset_size)
@@ -138,7 +138,7 @@ def train_3_models(feature, scores, prefix):
     print("End ======================= End")
 
 # train_3_models(features, scores_avr, "Scores Average")
-# train_3_models(features, scores_scaled, "Scores Z-scaled")
+train_3_models(features, scores_scaled, "Scores Z-scaled")
 # train_3_models(features, scores_z_avr, "Scores Z-scaled Avrg")
 
 
@@ -193,4 +193,4 @@ def train_personal_model(features, scores):
 
 
 
-train_personal_model(features, scores_z_avr)
+# train_personal_model(features, scores_z_avr)

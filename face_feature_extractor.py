@@ -151,6 +151,7 @@ class FaceFeatureExtractor:
                                                     self.shape[constants.NOSE_RIGHTEST_POINT_INDEX])
 
         self.add_feature("Nose width at nostrils", self.__scale_distance(nose_width))
+        self.add_feature("Nose widht to face widths", nose_width / self.face_width)
 
         nose_form = (self.shape[constants.NOSE_MIDDLE_POINT_INDEX][1] - self.shape[constants.NOSE_LEFTEST_POINT_INDEX][1])
         nose_form += (self.shape[constants.NOSE_MIDDLE_POINT_INDEX][1] - self.shape[constants.NOSE_RIGHTEST_POINT_INDEX][1])
@@ -209,6 +210,14 @@ class FaceFeatureExtractor:
         self.add_feature("Right jaw size", self.__scale_distance(right_jaw_size))
         self.add_feature("Left checkbown height to left jaw size", left_checkbown_height / left_jaw_size)
         self.add_feature("Right checkbown height to right jaw size", right_checkbown_height / right_jaw_size)
+
+    def extract_skin_smoothness(self):
+        (x, y, w, h) = face_utils.rect_to_bb(self.rect)
+        face = self.gray[y : h + y, x : x + w]
+        face_mean = face.mean()
+        avr_face_matrix = np.full((len(face),len(face[0])), face_mean, dtype=np.float)
+
+        self.add_feature("Skin Smoothenss", mean_squared_error(avr_face_matrix, face))
 
     def extract_symmetricity(self):
         (x, y, w, h) = face_utils.rect_to_bb(self.rect)
@@ -279,6 +288,7 @@ class FaceFeatureExtractor:
         self.extract_hair_color()
         self.extract_skintone_feature()
         self.extract_symmetricity()
+        self.extract_skin_smoothness()
         return self.features
 
     def extract_hair_color(self):
@@ -307,10 +317,15 @@ class FaceFeatureExtractor:
         rect = self.gray[hair_rect_y: rect_height, hair_rect_x:rect_width]
         self.add_feature("Skintone Grayscaled color", rect.mean())
 
-    def print_features(self):
+    def features_for_printinig(self):
+        formatted = ""
         for i, feature_val in enumerate(self.features['features_values']):
-            print(i, " ", self.features['features_names'][i], ": ", feature_val)
+            formatted = formatted + str(i) + " " + self.features['features_names'][i] + ": " + str(feature_val) + "\n";
 
+        return formatted
+
+    def print_features(self):
+        print(self.features_for_printinig())
     # TODO: implement good get interface for the important features
     def get_left_eye_height(self):
         height1 = geometry_helper.point_distance(self.shape[constants.LEFT_EYE_LAST_POINT_INDEX],

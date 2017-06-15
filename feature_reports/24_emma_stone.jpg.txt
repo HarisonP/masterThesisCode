@@ -1,0 +1,51 @@
+0 Relative Height: 97.62
+1 Relative Eye Level Width: 83.29
+2 Eye level Width To Height: 0.8531729909807427
+3 Relative Chin Width: 54.83
+4 Eye level Width to Chin Level Width: 0.6582857142857144
+5 Chin Level Width to Height: 0.5616315917770375
+6 Relative Chin height: 18.4
+7 Chin Height to Height : 0.18842934915088977
+8 Relative Chin to nose Height: 73.05
+9 Chin to nose Height to Height : 0.7482733403753962
+10 Chin Height to Chin to nose Height: 0.2518188728417852
+11 Relative size of the forhead: 24.57
+12 Checkbown width: 28.46
+13 Checkbown width to face width: 0.3417142857142857
+14 Relative distance between Pupils: 38.11
+15 Distance between Pupils to eye level Widht: 0.4575238095238095
+16 Relative inner distance between eyes: 22.27
+17 Inner Distance between eyes to eye level Widht: 0.2673333333333333
+18 Relative outer distance between eyes: 54.0
+19 Outer Distance between eyes to eye level Widht: 0.6482857142857142
+20 Right Eye Height: 5.16
+21 Left Eye Height: 5.19
+22 Right Eye Width: 15.1
+23 Left Eye Width: 16.74
+24 Left Eye Size: 86.8806
+25 Right Eye Size: 77.916
+26 Left Eye Size to Right Eye Size: 1.1150546742645926
+27 Left eyebrow height: 3.97
+28 Right eyebrow height: 4.76
+29 Nose width at nostrils: 14.3
+30 Nose widht to face widths: 0.17171428571428574
+31 Nose form: 3.97
+32 Nose height: 26.19
+33 Nose Size: 472.26
+34 Left nostril size: 8.28
+35 Right nostril size: 6.54
+36 Left nostril size to right nostril size: 1.2654545454545454
+37 Lower lip relative height: 5.55
+38 Upper lip relative height: 3.27
+39 Lower lip to upper lip heights: 1.35
+40 Mouth width: 34.94
+41 Left checkbown height: 32.67
+42 Right checkbown height: 33.3
+43 Left jaw size: 22.69
+44 Right jaw size: 14.91
+45 Left checkbown height to left jaw size: 1.4402097902097901
+46 Right checkbown height to right jaw size: 2.2341671101649814
+47 Hair Grayscaled color: 156.469551282
+48 Skintone Grayscaled color: 222.015224359
+49 Symmeticity: 100.406888197
+50 Skin Smoothenss: 5383.72869078
