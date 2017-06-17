@@ -1,6 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.dummy import DummyClassifier
+from sklearn import svm
 import copy
 import numpy as np
 
@@ -32,13 +33,20 @@ class PersonalModelTrainer:
         else:
             return 2
 
+    def train_personal_svm_predictor (self):
+        self.svm = svm.SVC(kernel="linear", C = 1)
+        self.svm.fit(self.X, self.Y)
+        return self.svm
+
     def train_personal_tree_predictor(self):
         self.forest = RandomForestClassifier(n_estimators=150, random_state=1)
         self.forest.fit(self.X, self.Y)
+        return self.forest
 
     def train_base_lane(self):
         self.baseline = DummyClassifier(random_state = 1, strategy='uniform')
         self.baseline.fit(self.X, self.Y)
+        return self.baseline
 
     def base_accuracy(self, test_y, y_true):
         # copy...
@@ -58,5 +66,15 @@ class PersonalModelTrainer:
             row.append(self.public_opinion.predict(np.array(row).reshape(1, -1)))
 
         y_pred = self.forest.predict(test_y)
+        y_true = [self.__create_classes(val) for val in y_true]
+        return accuracy_score(y_true, y_pred)
+
+    def svm_accuracy(self, test_y, y_true):
+
+        test_y = copy.deepcopy(test_y)
+        for row in test_y:
+            row.append(self.public_opinion.predict(np.array(row).reshape(1, -1)))
+
+        y_pred = self.svm.predict(test_y)
         y_true = [self.__create_classes(val) for val in y_true]
         return accuracy_score(y_true, y_pred)

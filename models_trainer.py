@@ -13,6 +13,7 @@ from sklearn import preprocessing
 from sklearn.decomposition import PCA
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.dummy import DummyRegressor
+from ensamble_stacking_predictor import StackingBestPredictor
 
 class ModelsTrainer:
     def __init__(self, features, scores):
@@ -27,8 +28,8 @@ class ModelsTrainer:
         self.pca_and_scale_X()
         self.pca_and_scale_X_scaled()
 
-        self.X_reduced = self.X_scaled01[:, self.features_above_tresh_hold]
-        self.reduced_features_names = [self.features_names[index] for index in self.features_above_tresh_hold]
+        self.X_transformed = self.X_scaled01[:, self.features_above_threshold]
+        self.transformed_features_names = [self.features_names[index] for index in self.features_above_threshold]
 
     def pca_and_scale_X_scaled(self):
         # this one is just like the svm
@@ -39,13 +40,18 @@ class ModelsTrainer:
         pca = PCA()
         pca.fit(self.X_scaled01)
 
-        self.scaled_features_above_tresh_hold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
+        self.scaled_features_above_threshold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
 
 
         pca.n_components = len(np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0])
         # print(pca.n_components)
 
-        self.X_pca_reduced_scaled = pca.fit_transform(self.X_scaled01)
+        self.X_pca_transformed_scaled = pca.fit_transform(self.X_scaled01)
+        self.X_pca_scaled_filtered = [self.filter_pca_features(row) for row in self.X]
+        self.pca = pca
+
+        # print(self.scaled_features_above_threshold)
+        # print(len(self.X_pca_scaled_filtered[0]))
 
     def pca_and_scale_X(self):
         # the second and the last of the input
@@ -54,15 +60,22 @@ class ModelsTrainer:
         pca = PCA()
         pca.fit(self.X)
 
-        self.features_above_tresh_hold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
+        self.features_above_threshold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
         pca.n_components = len( np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0])
 
-        self.X_pca_reduced = pca.fit_transform(self.X)
+        self.X_pca_transformed = pca.fit_transform(self.X)
+
+        self.X_pca_filtered = [self.filter_pca_features(row) for row in self.X]
+
+        # print(self.features_above_threshold)
+        # print(len(self.X_pca_filtered[0]))
+
         # transoform in [0 1]
         self.pca_min_max_scaler = preprocessing.MinMaxScaler()
-        self.pca_min_max_scaler.fit(self.X_pca_reduced)
-        self.X_pca_reduced = self.pca_min_max_scaler.transform(self.X_pca_reduced)
+        self.pca_min_max_scaler.fit(self.X_pca_transformed)
+        self.X_pca_transformed = self.pca_min_max_scaler.transform(self.X_pca_transformed)
 
+        # print(len(self.X_pca_transformed[0]))
     def get_svm(self):
         # 1.07 ( 0.81)
         # the best for score_avr
@@ -81,10 +94,10 @@ class ModelsTrainer:
         return self.min_max_scaler.transform(features)
 
     def filter_scaled_pca_features(self, features):
-        return [features[i] for i in self.scaled_features_above_tresh_hold]
+        return [features[i] for i in self.scaled_features_above_threshold]
 
     def filter_pca_features(self, features):
-        return [features[i] for i in self.features_above_tresh_hold]
+        return [features[i] for i in self.features_above_threshold]
 
     def get_ada_boost(self, clf, n_estimators):
         return AdaBoostRegressor(n_estimators=n_estimators, base_estimator=clf, loss="square")
@@ -125,54 +138,72 @@ class ModelsTrainer:
         graph = pydotplus.graph_from_dot_data(dot_data)
         graph.write_pdf("tree.pdf")
 
-    def train_cross_val(self, train_set, clf):
+    def train_cross_val(self, train_set, clf, scoring = 'neg_mean_absolute_error'):
         # print(self.X_scaled01)
         # scoring='neg_mean_absolute_error'
-        scores = cross_val_score(clf, train_set, self.Y, cv=10, scoring='neg_mean_absolute_error')
+        scores = cross_val_score(clf, train_set, self.Y, cv=10, scoring=scoring)
         return scores
 
-    def cross_val_scaled01_svm(self):
-        return self.train_cross_val(self.X_scaled01, self.get_svm())
+    # def cross_val_ensamble_best(self, scoring):
+    #     clf = StackingBestPredictor(self.train_full_tree(), self.train_scaled01_full_svm(), self.train_scaled_fetures_knn())
+    #     cross_val_score(clf, self.X, self.Y, cv=10, scoring=scoring)
 
-    def cross_val_unscaled_svm(self):
-        return self.train_cross_val(self.X, self.get_svm())
+    def cross_val_scaled01_svm(self, scoring):
+        return self.train_cross_val(self.X_scaled01, self.get_svm(), scoring)
 
-    def cross_val_reduced_pca_features_svm(self):
-        return self.train_cross_val(self.X_pca_reduced, self.get_svm())
+    def cross_val_unscaled_svm(self, scoring):
+        return self.train_cross_val(self.X, self.get_svm(), scoring)
 
-    def cross_val_reduced_pca_features_svm(self):
-        return self.train_cross_val(self.X_pca_reduced, self.get_svm())
+    def cross_val_transformed_pca_features_svm(self, scoring):
+        return self.train_cross_val(self.X_pca_transformed, self.get_svm(), scoring)
 
+    def cross_val_transformed_scaled_features_svm(self, scoring):
+        return self.train_cross_val(self.X_pca_transformed_scaled, self.get_svm(), scoring)
 
-    def cross_val_reduced_scaled_features_svm(self):
-        return self.train_cross_val(self.X_pca_reduced_scaled, self.get_svm())
+    def cross_val_transformed_features_svm(self, scoring):
+        return self.train_cross_val(self.X_transformed, self.get_svm(), scoring)
 
-    def cross_val_reduced_features_svm(self):
-        return self.train_cross_val(self.X_reduced, self.get_svm())
+    def cross_val_pca_scaled_filtered_features_svm(self, scoring):
+        return self.train_cross_val(self.X_pca_scaled_filtered, self.get_svm(), scoring)
 
-    def cross_val_baseline(self):
-        return self.train_cross_val(self.X_reduced, self.get_baseline())
+    def cross_val_baseline(self, scoring):
+        return self.train_cross_val(self.X_transformed, self.get_baseline(), scoring)
 
-    def cross_val_ada_boost_svm(self):
-        return self.train_cross_val(self.X_scaled01, self.get_ada_boost(self.get_svm(), 150))
+    def cross_val_ada_boost_svm(self, scoring):
+        return self.train_cross_val(self.X_scaled01, self.get_ada_boost(self.get_svm(), 150), scoring)
 
-    def cross_val_tree(self):
-        return self.train_cross_val(self.X, self.get_tree())
+    def cross_val_tree(self, scoring):
+        return self.train_cross_val(self.X, self.get_tree(), scoring)
 
-    def cross_val_reduced_scaled_features_tree(self):
-        return self.train_cross_val(self.X_pca_reduced_scaled, self.get_tree())
+    def cross_val_transformed_scaled_features_tree(self, scoring):
+        return self.train_cross_val(self.X_pca_transformed_scaled, self.get_tree(), scoring)
 
-    def cross_val_ada_boost_tree(self):
-        return self.train_cross_val(self.X, self.get_ada_boost(None, 150))
+    def cross_val_transformed_features_tree(self, scoring):
+        return self.train_cross_val(self.X_pca_transformed, self.get_tree(), scoring)
 
-    def cross_val_knn(self):
-        return self.train_cross_val(self.X, self.get_knn())
+    def cross_val_pca_scaled_filtered_features_tree(self, scoring):
+        return self.train_cross_val(self.X_pca_scaled_filtered, self.get_tree(), scoring)
 
-    def cross_val_reduced_scaled_features_knn(self):
-        return self.train_cross_val(self.X_pca_reduced_scaled, self.get_knn())
+    def cross_val_pca_filtered_features_tree(self, scoring):
+        return self.train_cross_val(self.X_pca_filtered, self.get_tree(), scoring)
+
+    def cross_val_ada_boost_tree(self, scoring):
+        return self.train_cross_val(self.X, self.get_ada_boost(None, 150), scoring)
+
+    def cross_val_knn(self, scoring):
+        return self.train_cross_val(self.X, self.get_knn(), scoring)
+
+    def cross_val_transformed_scaled_features_knn(self, scoring):
+        return self.train_cross_val(self.X_pca_transformed_scaled, self.get_knn(), scoring)
 
     def train_scaled_fetures_knn(self):
-        return self.get_knn().fit(self.X_pca_reduced_scaled, self.Y)
+        return self.get_knn().fit(self.X_pca_transformed_scaled, self.Y)
 
-    def cross_val_reduced_features_knn(self):
-        return self.train_cross_val(self.X_reduced, self.get_knn())
+    def cross_val_transformed_features_knn(self, scoring):
+        return self.train_cross_val(self.X_transformed, self.get_knn(), scoring)
+
+    def cross_val_pca_filtered_features_knn(self, scoring):
+        return self.train_cross_val(self.X_pca_filtered, self.get_tree(), scoring)
+
+    def cross_val_pca_scaled_filtered_features_knn(self, scoring):
+        return self.train_cross_val(self.X_pca_scaled_filtered, self.get_tree(), scoring)

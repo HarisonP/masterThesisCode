@@ -1,0 +1,351 @@
+!!! Scores Average !!!!
+Start ======================= Start
+Number of photos: 107
+########## ErrorType neg_mean_absolute_error  ##########
+Mixed Tree Cross Valid Error: 1.80 (+/- 0.55)
+Mixed Tree Cross pca_filtered Valid Error: 1.93 (+/- 0.71)
+Mixed Tree Cross pca_filtered_scaled Valid Error: 1.93 (+/- 0.71)
+Mixed PCA transformed scaled01 Tree Corss Valid Error: 1.84 (+/- 0.43)
+Mixed scaled01 SVM Cross Valid Error: 1.84 (+/- 0.65)
+Mixed scaled01 PCA filtered SVM Cross Valid Error: 2.00 (+/- 0.82)
+Mixed PCA transformed SVM Cross Valid Error: 1.89 (+/- 0.68)
+Mixed PCA transformed scaled01 SVM Cross Valid Error: 1.83 (+/- 0.63)
+Mixed transformed scaled01 SVM Cross Valid Error: 1.96 (+/- 0.69)
+Mixed KNN Cross Valid Error: 1.94 (+/- 0.58)
+Mixed PCA transformed scaled01 KNN Cross Valid Error: 1.94 (+/- 0.94)
+Mixed transformed scaled01 KNN Cross Valid Error: 1.96 (+/- 0.69)
+Mixed filtered scaled01 KNN Cross Valid Error: 1.93 (+/- 0.71)
+Mixed filtered KNN Cross Valid Error: 1.93 (+/- 0.71)
+Mixed BaseLine Cross Valid Error: 2.10 (+/- 0.67)
+Number of photos: 60
+########## ErrorType neg_mean_absolute_error  ##########
+Women Tree Cross Valid Error: 1.92 (+/- 0.85)
+Women Tree Cross pca_filtered Valid Error: 1.99 (+/- 0.97)
+Women Tree Cross pca_filtered_scaled Valid Error: 1.99 (+/- 0.97)
+Women PCA transformed scaled01 Tree Corss Valid Error: 1.95 (+/- 0.43)
+Women scaled01 SVM Cross Valid Error: 1.96 (+/- 0.60)
+Women scaled01 PCA filtered SVM Cross Valid Error: 2.10 (+/- 0.80)
+Women PCA transformed SVM Cross Valid Error: 2.19 (+/- 0.56)
+Women PCA transformed scaled01 SVM Cross Valid Error: 1.96 (+/- 0.61)
+Women transformed scaled01 SVM Cross Valid Error: 2.09 (+/- 0.75)
+Women KNN Cross Valid Error: 2.22 (+/- 1.04)
+Women PCA transformed scaled01 KNN Cross Valid Error: 1.93 (+/- 0.69)
+Women transformed scaled01 KNN Cross Valid Error: 2.09 (+/- 0.75)
+Women filtered scaled01 KNN Cross Valid Error: 1.99 (+/- 0.97)
+Women filtered KNN Cross Valid Error: 1.99 (+/- 0.97)
+Women BaseLine Cross Valid Error: 2.33 (+/- 0.51)
+Number of photos: 46
+########## ErrorType neg_mean_absolute_error  ##########
+Men Tree Cross Valid Error: 1.97 (+/- 1.44)
+Men Tree Cross pca_filtered Valid Error: 1.98 (+/- 1.38)
+Men Tree Cross pca_filtered_scaled Valid Error: 1.98 (+/- 1.38)
+Men PCA transformed scaled01 Tree Corss Valid Error: 1.73 (+/- 1.00)
+Men scaled01 SVM Cross Valid Error: 2.06 (+/- 1.08)
+Men scaled01 PCA filtered SVM Cross Valid Error: 2.27 (+/- 1.24)
+Men PCA transformed SVM Cross Valid Error: 1.82 (+/- 1.15)
+Men PCA transformed scaled01 SVM Cross Valid Error: 2.06 (+/- 1.09)
+Men transformed scaled01 SVM Cross Valid Error: 1.85 (+/- 1.26)
+Men KNN Cross Valid Error: 1.79 (+/- 1.46)
+Men PCA transformed scaled01 KNN Cross Valid Error: 1.94 (+/- 1.03)
+Men transformed scaled01 KNN Cross Valid Error: 1.85 (+/- 1.26)
+Men filtered scaled01 KNN Cross Valid Error: 1.98 (+/- 1.38)
+Men filtered KNN Cross Valid Error: 1.98 (+/- 1.38)
+Men BaseLine Cross Valid Error: 1.85 (+/- 1.08)
+!!! Scores Average !!!!
+End ======================= End
+
+
+
+
+!!! Scores Z-scaled !!!!
+Start ======================= Start
+Number of photos: 107
+########## ErrorType neg_mean_absolute_error  ##########
+Mixed Tree Cross Valid Error: 1.19 (+/- 0.48)
+Mixed Tree Cross pca_filtered Valid Error: 1.46 (+/- 0.71)
+Mixed Tree Cross pca_filtered_scaled Valid Error: 1.46 (+/- 0.71)
+Mixed PCA transformed scaled01 Tree Corss Valid Error: 1.41 (+/- 0.41)
+Mixed scaled01 SVM Cross Valid Error: 1.36 (+/- 0.58)
+Mixed scaled01 PCA filtered SVM Cross Valid Error: 1.46 (+/- 0.72)
+Mixed PCA transformed SVM Cross Valid Error: 1.44 (+/- 0.51)
+Mixed PCA transformed scaled01 SVM Cross Valid Error: 1.35 (+/- 0.57)
+Mixed transformed scaled01 SVM Cross Valid Error: 1.49 (+/- 0.49)
+Mixed KNN Cross Valid Error: 1.52 (+/- 0.63)
+Mixed PCA transformed scaled01 KNN Cross Valid Error: 1.46 (+/- 0.63)
+Mixed transformed scaled01 KNN Cross Valid Error: 1.49 (+/- 0.49)
+Mixed filtered scaled01 KNN Cross Valid Error: 1.46 (+/- 0.71)
+Mixed filtered KNN Cross Valid Error: 1.46 (+/- 0.71)
+Mixed BaseLine Cross Valid Error: 1.75 (+/- 0.46)
+Number of photos: 60
+########## ErrorType neg_mean_absolute_error  ##########
+Women Tree Cross Valid Error: 1.29 (+/- 0.92)
+Women Tree Cross pca_filtered Valid Error: 1.38 (+/- 0.94)
+Women Tree Cross pca_filtered_scaled Valid Error: 1.38 (+/- 0.94)
+Women PCA transformed scaled01 Tree Corss Valid Error: 1.19 (+/- 0.68)
+Women scaled01 SVM Cross Valid Error: 1.40 (+/- 0.74)
+Women scaled01 PCA filtered SVM Cross Valid Error: 1.39 (+/- 0.65)
+Women PCA transformed SVM Cross Valid Error: 1.48 (+/- 0.85)
+Women PCA transformed scaled01 SVM Cross Valid Error: 1.40 (+/- 0.76)
+Women transformed scaled01 SVM Cross Valid Error: 1.56 (+/- 0.91)
+Women KNN Cross Valid Error: 1.56 (+/- 0.93)
+Women PCA transformed scaled01 KNN Cross Valid Error: 1.29 (+/- 0.75)
+Women transformed scaled01 KNN Cross Valid Error: 1.56 (+/- 0.91)
+Women filtered scaled01 KNN Cross Valid Error: 1.38 (+/- 0.94)
+Women filtered KNN Cross Valid Error: 1.38 (+/- 0.94)
+Women BaseLine Cross Valid Error: 1.74 (+/- 0.72)
+Number of photos: 46
+########## ErrorType neg_mean_absolute_error  ##########
+Men Tree Cross Valid Error: 1.52 (+/- 0.78)
+Men Tree Cross pca_filtered Valid Error: 1.65 (+/- 0.62)
+Men Tree Cross pca_filtered_scaled Valid Error: 1.65 (+/- 0.62)
+Men PCA transformed scaled01 Tree Corss Valid Error: 1.65 (+/- 1.02)
+Men scaled01 SVM Cross Valid Error: 1.83 (+/- 1.03)
+Men scaled01 PCA filtered SVM Cross Valid Error: 1.79 (+/- 0.83)
+Men PCA transformed SVM Cross Valid Error: 1.71 (+/- 0.74)
+Men PCA transformed scaled01 SVM Cross Valid Error: 1.84 (+/- 1.02)
+Men transformed scaled01 SVM Cross Valid Error: 1.62 (+/- 0.88)
+Men KNN Cross Valid Error: 1.54 (+/- 0.99)
+Men PCA transformed scaled01 KNN Cross Valid Error: 1.73 (+/- 0.96)
+Men transformed scaled01 KNN Cross Valid Error: 1.62 (+/- 0.88)
+Men filtered scaled01 KNN Cross Valid Error: 1.65 (+/- 0.62)
+Men filtered KNN Cross Valid Error: 1.65 (+/- 0.62)
+Men BaseLine Cross Valid Error: 1.60 (+/- 0.92)
+!!! Scores Z-scaled !!!!
+End ======================= End
+
+
+
+
+!!! Scores Z-scaled Avrg !!!!
+Start ======================= Start
+Number of photos: 107
+########## ErrorType neg_mean_absolute_error  ##########
+Mixed Tree Cross Valid Error: 0.44 (+/- 0.18)
+Mixed Tree Cross pca_filtered Valid Error: 0.54 (+/- 0.27)
+Mixed Tree Cross pca_filtered_scaled Valid Error: 0.54 (+/- 0.27)
+Mixed PCA transformed scaled01 Tree Corss Valid Error: 0.52 (+/- 0.16)
+Mixed scaled01 SVM Cross Valid Error: 0.51 (+/- 0.22)
+Mixed scaled01 PCA filtered SVM Cross Valid Error: 0.55 (+/- 0.25)
+Mixed PCA transformed SVM Cross Valid Error: 0.52 (+/- 0.20)
+Mixed PCA transformed scaled01 SVM Cross Valid Error: 0.51 (+/- 0.22)
+Mixed transformed scaled01 SVM Cross Valid Error: 0.55 (+/- 0.19)
+Mixed KNN Cross Valid Error: 0.56 (+/- 0.23)
+Mixed PCA transformed scaled01 KNN Cross Valid Error: 0.54 (+/- 0.23)
+Mixed transformed scaled01 KNN Cross Valid Error: 0.55 (+/- 0.19)
+Mixed filtered scaled01 KNN Cross Valid Error: 0.54 (+/- 0.27)
+Mixed filtered KNN Cross Valid Error: 0.54 (+/- 0.27)
+Mixed BaseLine Cross Valid Error: 0.64 (+/- 0.17)
+Number of photos: 60
+########## ErrorType neg_mean_absolute_error  ##########
+Women Tree Cross Valid Error: 0.47 (+/- 0.34)
+Women Tree Cross pca_filtered Valid Error: 0.51 (+/- 0.35)
+Women Tree Cross pca_filtered_scaled Valid Error: 0.51 (+/- 0.35)
+Women PCA transformed scaled01 Tree Corss Valid Error: 0.44 (+/- 0.25)
+Women scaled01 SVM Cross Valid Error: 0.56 (+/- 0.32)
+Women scaled01 PCA filtered SVM Cross Valid Error: 0.55 (+/- 0.26)
+Women PCA transformed SVM Cross Valid Error: 0.54 (+/- 0.29)
+Women PCA transformed scaled01 SVM Cross Valid Error: 0.56 (+/- 0.35)
+Women transformed scaled01 SVM Cross Valid Error: 0.56 (+/- 0.35)
+Women KNN Cross Valid Error: 0.57 (+/- 0.34)
+Women PCA transformed scaled01 KNN Cross Valid Error: 0.47 (+/- 0.28)
+Women transformed scaled01 KNN Cross Valid Error: 0.56 (+/- 0.35)
+Women filtered scaled01 KNN Cross Valid Error: 0.51 (+/- 0.35)
+Women filtered KNN Cross Valid Error: 0.51 (+/- 0.35)
+Women BaseLine Cross Valid Error: 0.64 (+/- 0.26)
+Number of photos: 46
+########## ErrorType neg_mean_absolute_error  ##########
+Men Tree Cross Valid Error: 0.55 (+/- 0.29)
+Men Tree Cross pca_filtered Valid Error: 0.60 (+/- 0.23)
+Men Tree Cross pca_filtered_scaled Valid Error: 0.60 (+/- 0.23)
+Men PCA transformed scaled01 Tree Corss Valid Error: 0.61 (+/- 0.37)
+Men scaled01 SVM Cross Valid Error: 0.74 (+/- 0.40)
+Men scaled01 PCA filtered SVM Cross Valid Error: 0.67 (+/- 0.33)
+Men PCA transformed SVM Cross Valid Error: 0.71 (+/- 0.35)
+Men PCA transformed scaled01 SVM Cross Valid Error: 0.75 (+/- 0.40)
+Men transformed scaled01 SVM Cross Valid Error: 0.61 (+/- 0.32)
+Men KNN Cross Valid Error: 0.57 (+/- 0.36)
+Men PCA transformed scaled01 KNN Cross Valid Error: 0.64 (+/- 0.35)
+Men transformed scaled01 KNN Cross Valid Error: 0.61 (+/- 0.32)
+Men filtered scaled01 KNN Cross Valid Error: 0.60 (+/- 0.23)
+Men filtered KNN Cross Valid Error: 0.60 (+/- 0.23)
+Men BaseLine Cross Valid Error: 0.59 (+/- 0.34)
+!!! Scores Z-scaled Avrg !!!!
+End ======================= End
+
+
+
+
+!!! Scores Average !!!!
+Start ======================= Start
+Number of photos: 107
+########## ErrorType neg_mean_squared_error  ##########
+Mixed Tree Cross Valid Error: 4.83 (+/- 3.16)
+Mixed Tree Cross pca_filtered Valid Error: 5.36 (+/- 3.65)
+Mixed Tree Cross pca_filtered_scaled Valid Error: 5.36 (+/- 3.65)
+Mixed PCA transformed scaled01 Tree Corss Valid Error: 4.95 (+/- 2.37)
+Mixed scaled01 SVM Cross Valid Error: 5.10 (+/- 3.33)
+Mixed scaled01 PCA filtered SVM Cross Valid Error: 6.25 (+/- 5.28)
+Mixed PCA transformed SVM Cross Valid Error: 5.23 (+/- 3.39)
+Mixed PCA transformed scaled01 SVM Cross Valid Error: 5.14 (+/- 3.34)
+Mixed transformed scaled01 SVM Cross Valid Error: 5.53 (+/- 3.52)
+Mixed KNN Cross Valid Error: 5.61 (+/- 3.70)
+Mixed PCA transformed scaled01 KNN Cross Valid Error: 5.68 (+/- 5.16)
+Mixed transformed scaled01 KNN Cross Valid Error: 5.53 (+/- 3.52)
+Mixed filtered scaled01 KNN Cross Valid Error: 5.36 (+/- 3.65)
+Mixed filtered KNN Cross Valid Error: 5.36 (+/- 3.65)
+Mixed BaseLine Cross Valid Error: 6.14 (+/- 2.45)
+Number of photos: 60
+########## ErrorType neg_mean_squared_error  ##########
+Women Tree Cross Valid Error: 5.30 (+/- 3.67)
+Women Tree Cross pca_filtered Valid Error: 5.93 (+/- 5.69)
+Women Tree Cross pca_filtered_scaled Valid Error: 5.93 (+/- 5.69)
+Women PCA transformed scaled01 Tree Corss Valid Error: 5.22 (+/- 2.36)
+Women scaled01 SVM Cross Valid Error: 5.84 (+/- 2.93)
+Women scaled01 PCA filtered SVM Cross Valid Error: 6.59 (+/- 4.73)
+Women PCA transformed SVM Cross Valid Error: 6.93 (+/- 3.42)
+Women PCA transformed scaled01 SVM Cross Valid Error: 5.86 (+/- 2.96)
+Women transformed scaled01 SVM Cross Valid Error: 6.03 (+/- 3.28)
+Women KNN Cross Valid Error: 7.58 (+/- 5.03)
+Women PCA transformed scaled01 KNN Cross Valid Error: 5.31 (+/- 3.94)
+Women transformed scaled01 KNN Cross Valid Error: 6.03 (+/- 3.28)
+Women filtered scaled01 KNN Cross Valid Error: 5.93 (+/- 5.69)
+Women filtered KNN Cross Valid Error: 5.93 (+/- 5.69)
+Women BaseLine Cross Valid Error: 7.15 (+/- 3.17)
+Number of photos: 46
+########## ErrorType neg_mean_squared_error  ##########
+Men Tree Cross Valid Error: 5.79 (+/- 7.17)
+Men Tree Cross pca_filtered Valid Error: 5.66 (+/- 6.50)
+Men Tree Cross pca_filtered_scaled Valid Error: 5.66 (+/- 6.50)
+Men PCA transformed scaled01 Tree Corss Valid Error: 4.57 (+/- 3.90)
+Men scaled01 SVM Cross Valid Error: 6.09 (+/- 5.67)
+Men scaled01 PCA filtered SVM Cross Valid Error: 7.47 (+/- 7.36)
+Men PCA transformed SVM Cross Valid Error: 4.89 (+/- 4.59)
+Men PCA transformed scaled01 SVM Cross Valid Error: 6.08 (+/- 5.70)
+Men transformed scaled01 SVM Cross Valid Error: 5.25 (+/- 5.40)
+Men KNN Cross Valid Error: 4.89 (+/- 6.66)
+Men PCA transformed scaled01 KNN Cross Valid Error: 5.26 (+/- 4.31)
+Men transformed scaled01 KNN Cross Valid Error: 5.25 (+/- 5.40)
+Men filtered scaled01 KNN Cross Valid Error: 5.66 (+/- 6.50)
+Men filtered KNN Cross Valid Error: 5.66 (+/- 6.50)
+Men BaseLine Cross Valid Error: 5.06 (+/- 4.72)
+!!! Scores Average !!!!
+End ======================= End
+
+
+
+
+!!! Scores Z-scaled !!!!
+Start ======================= Start
+Number of photos: 107
+########## ErrorType neg_mean_squared_error  ##########
+Mixed Tree Cross Valid Error: 2.57 (+/- 1.85)
+Mixed Tree Cross pca_filtered Valid Error: 3.45 (+/- 2.78)
+Mixed Tree Cross pca_filtered_scaled Valid Error: 3.45 (+/- 2.78)
+Mixed PCA transformed scaled01 Tree Corss Valid Error: 3.35 (+/- 2.25)
+Mixed scaled01 SVM Cross Valid Error: 2.94 (+/- 2.72)
+Mixed scaled01 PCA filtered SVM Cross Valid Error: 3.77 (+/- 4.06)
+Mixed PCA transformed SVM Cross Valid Error: 3.10 (+/- 2.17)
+Mixed PCA transformed scaled01 SVM Cross Valid Error: 2.92 (+/- 2.68)
+Mixed transformed scaled01 SVM Cross Valid Error: 3.60 (+/- 2.50)
+Mixed KNN Cross Valid Error: 3.68 (+/- 2.43)
+Mixed PCA transformed scaled01 KNN Cross Valid Error: 3.37 (+/- 2.55)
+Mixed transformed scaled01 KNN Cross Valid Error: 3.60 (+/- 2.50)
+Mixed filtered scaled01 KNN Cross Valid Error: 3.45 (+/- 2.78)
+Mixed filtered KNN Cross Valid Error: 3.45 (+/- 2.78)
+Mixed BaseLine Cross Valid Error: 4.44 (+/- 2.27)
+Number of photos: 60
+########## ErrorType neg_mean_squared_error  ##########
+Women Tree Cross Valid Error: 2.77 (+/- 3.37)
+Women Tree Cross pca_filtered Valid Error: 3.01 (+/- 3.13)
+Women Tree Cross pca_filtered_scaled Valid Error: 3.01 (+/- 3.13)
+Women PCA transformed scaled01 Tree Corss Valid Error: 2.27 (+/- 1.96)
+Women scaled01 SVM Cross Valid Error: 3.10 (+/- 3.15)
+Women scaled01 PCA filtered SVM Cross Valid Error: 3.08 (+/- 2.77)
+Women PCA transformed SVM Cross Valid Error: 3.33 (+/- 3.19)
+Women PCA transformed scaled01 SVM Cross Valid Error: 3.11 (+/- 3.23)
+Women transformed scaled01 SVM Cross Valid Error: 3.35 (+/- 3.10)
+Women KNN Cross Valid Error: 3.99 (+/- 5.23)
+Women PCA transformed scaled01 KNN Cross Valid Error: 2.57 (+/- 2.64)
+Women transformed scaled01 KNN Cross Valid Error: 3.35 (+/- 3.10)
+Women filtered scaled01 KNN Cross Valid Error: 3.01 (+/- 3.13)
+Women filtered KNN Cross Valid Error: 3.01 (+/- 3.13)
+Women BaseLine Cross Valid Error: 4.31 (+/- 3.12)
+Number of photos: 46
+########## ErrorType neg_mean_squared_error  ##########
+Men Tree Cross Valid Error: 3.52 (+/- 3.05)
+Men Tree Cross pca_filtered Valid Error: 4.30 (+/- 3.34)
+Men Tree Cross pca_filtered_scaled Valid Error: 4.30 (+/- 3.34)
+Men PCA transformed scaled01 Tree Corss Valid Error: 4.07 (+/- 3.95)
+Men scaled01 SVM Cross Valid Error: 5.12 (+/- 5.20)
+Men scaled01 PCA filtered SVM Cross Valid Error: 5.96 (+/- 6.57)
+Men PCA transformed SVM Cross Valid Error: 4.23 (+/- 3.51)
+Men PCA transformed scaled01 SVM Cross Valid Error: 5.17 (+/- 5.23)
+Men transformed scaled01 SVM Cross Valid Error: 4.19 (+/- 3.36)
+Men KNN Cross Valid Error: 3.50 (+/- 3.33)
+Men PCA transformed scaled01 KNN Cross Valid Error: 4.64 (+/- 4.43)
+Men transformed scaled01 KNN Cross Valid Error: 4.19 (+/- 3.36)
+Men filtered scaled01 KNN Cross Valid Error: 4.30 (+/- 3.34)
+Men filtered KNN Cross Valid Error: 4.30 (+/- 3.34)
+Men BaseLine Cross Valid Error: 4.14 (+/- 3.84)
+!!! Scores Z-scaled !!!!
+End ======================= End
+
+
+
+
+!!! Scores Z-scaled Avrg !!!!
+Start ======================= Start
+Number of photos: 107
+########## ErrorType neg_mean_squared_error  ##########
+Mixed Tree Cross Valid Error: 0.35 (+/- 0.27)
+Mixed Tree Cross pca_filtered Valid Error: 0.46 (+/- 0.37)
+Mixed Tree Cross pca_filtered_scaled Valid Error: 0.46 (+/- 0.37)
+Mixed PCA transformed scaled01 Tree Corss Valid Error: 0.45 (+/- 0.31)
+Mixed scaled01 SVM Cross Valid Error: 0.42 (+/- 0.37)
+Mixed scaled01 PCA filtered SVM Cross Valid Error: 0.52 (+/- 0.57)
+Mixed PCA transformed SVM Cross Valid Error: 0.43 (+/- 0.31)
+Mixed PCA transformed scaled01 SVM Cross Valid Error: 0.41 (+/- 0.37)
+Mixed transformed scaled01 SVM Cross Valid Error: 0.50 (+/- 0.41)
+Mixed KNN Cross Valid Error: 0.50 (+/- 0.33)
+Mixed PCA transformed scaled01 KNN Cross Valid Error: 0.46 (+/- 0.35)
+Mixed transformed scaled01 KNN Cross Valid Error: 0.50 (+/- 0.41)
+Mixed filtered scaled01 KNN Cross Valid Error: 0.46 (+/- 0.37)
+Mixed filtered KNN Cross Valid Error: 0.46 (+/- 0.37)
+Mixed BaseLine Cross Valid Error: 0.60 (+/- 0.31)
+Number of photos: 60
+########## ErrorType neg_mean_squared_error  ##########
+Women Tree Cross Valid Error: 0.37 (+/- 0.47)
+Women Tree Cross pca_filtered Valid Error: 0.41 (+/- 0.42)
+Women Tree Cross pca_filtered_scaled Valid Error: 0.41 (+/- 0.42)
+Women PCA transformed scaled01 Tree Corss Valid Error: 0.31 (+/- 0.27)
+Women scaled01 SVM Cross Valid Error: 0.50 (+/- 0.52)
+Women scaled01 PCA filtered SVM Cross Valid Error: 0.46 (+/- 0.39)
+Women PCA transformed SVM Cross Valid Error: 0.48 (+/- 0.47)
+Women PCA transformed scaled01 SVM Cross Valid Error: 0.51 (+/- 0.56)
+Women transformed scaled01 SVM Cross Valid Error: 0.45 (+/- 0.48)
+Women KNN Cross Valid Error: 0.54 (+/- 0.71)
+Women PCA transformed scaled01 KNN Cross Valid Error: 0.35 (+/- 0.36)
+Women transformed scaled01 KNN Cross Valid Error: 0.45 (+/- 0.48)
+Women filtered scaled01 KNN Cross Valid Error: 0.41 (+/- 0.42)
+Women filtered KNN Cross Valid Error: 0.41 (+/- 0.42)
+Women BaseLine Cross Valid Error: 0.58 (+/- 0.42)
+Number of photos: 46
+########## ErrorType neg_mean_squared_error  ##########
+Men Tree Cross Valid Error: 0.47 (+/- 0.41)
+Men Tree Cross pca_filtered Valid Error: 0.58 (+/- 0.45)
+Men Tree Cross pca_filtered_scaled Valid Error: 0.58 (+/- 0.45)
+Men PCA transformed scaled01 Tree Corss Valid Error: 0.55 (+/- 0.53)
+Men scaled01 SVM Cross Valid Error: 0.81 (+/- 0.79)
+Men scaled01 PCA filtered SVM Cross Valid Error: 0.81 (+/- 0.92)
+Men PCA transformed SVM Cross Valid Error: 0.72 (+/- 0.62)
+Men PCA transformed scaled01 SVM Cross Valid Error: 0.83 (+/- 0.81)
+Men transformed scaled01 SVM Cross Valid Error: 0.60 (+/- 0.52)
+Men KNN Cross Valid Error: 0.47 (+/- 0.45)
+Men PCA transformed scaled01 KNN Cross Valid Error: 0.63 (+/- 0.60)
+Men transformed scaled01 KNN Cross Valid Error: 0.60 (+/- 0.52)
+Men filtered scaled01 KNN Cross Valid Error: 0.58 (+/- 0.45)
+Men filtered KNN Cross Valid Error: 0.58 (+/- 0.45)
+Men BaseLine Cross Valid Error: 0.56 (+/- 0.52)
+!!! Scores Z-scaled Avrg !!!!
+End ======================= End
+

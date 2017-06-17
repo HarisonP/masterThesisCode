@@ -73,19 +73,19 @@ class FaceFeatureExtractor:
     def extract_eyes_features(self):
         distance_between_pulips = geometry_helper.point_distance(self.left_pupils, self.rigth_pupils)
         self.add_feature("Relative distance between Pupils", self.__scale_distance(distance_between_pulips))
-        self.add_feature("Distance between Pupils to eye level Widht", distance_between_pulips / self.face_width)
+        self.add_feature("Distance between Pupils to eye level Width", distance_between_pulips / self.face_width)
 
         small_distance_between_eyes = geometry_helper.point_distance(self.shape[constants.LEFT_EYE_RIGHTEST_POINT_INDEX],
                                                                      self.shape[constants.RIGHT_EYE_LEFTEST_POINT_INDEX])
 
         self.add_feature("Relative inner distance between eyes", self.__scale_distance(small_distance_between_eyes))
-        self.add_feature("Inner Distance between eyes to eye level Widht", small_distance_between_eyes / self.face_width)
+        self.add_feature("Inner Distance between eyes to eye level Width", small_distance_between_eyes / self.face_width)
 
         big_distance_between_eyes = geometry_helper.point_distance(self.shape[constants.LEFT_EYE_LEFTEST_POINT_INDEX],
                                                                    self.shape[constants.RIGHT_EYE_RIGHTEST_POINT_INDEX])
 
         self.add_feature("Relative outer distance between eyes", self.__scale_distance(big_distance_between_eyes))
-        self.add_feature("Outer Distance between eyes to eye level Widht", big_distance_between_eyes / self.face_width)
+        self.add_feature("Outer Distance between eyes to eye level Width", big_distance_between_eyes / self.face_width)
 
         right_eye_height = self.__scale_distance(self.get_right_eye_height())
         left_eye_height = self.__scale_distance(self.get_left_eye_height())
@@ -117,7 +117,7 @@ class FaceFeatureExtractor:
                                                     self.shape[constants.RIGHT_CHIN_START])
 
         self.add_feature("Relative Chin Width", self.__scale_distance(chin_width))
-        self.add_feature("Eye level Width to Chin Level Width", chin_width / self.face_width)
+        self.add_feature("Chin Level Width to Eye level Width", chin_width / self.face_width)
         self.add_feature("Chin Level Width to Height", chin_width / self.face_height)
 
 
@@ -134,10 +134,10 @@ class FaceFeatureExtractor:
         self.add_feature("Chin to nose Height to Height ", chin_to_nose_end_height / self.face_height)
         self.add_feature("Chin Height to Chin to nose Height", chin_height / chin_to_nose_end_height)
 
-        self.add_feature("Relative size of the forhead", self.__scale_distance(self.face_height - chin_to_nose_end_height))
+        self.add_feature("Relative size of the forehead", self.__scale_distance(self.face_height - chin_to_nose_end_height))
 
-        self.add_feature("Checkbown width", self.__scale_distance(self.face_width - chin_width))
-        self.add_feature("Checkbown width to face width", (self.face_width - chin_width) / self.face_width)
+        self.add_feature("Cheekbone width", self.__scale_distance(self.face_width - chin_width))
+        self.add_feature("Cheekbone width to face width", (self.face_width - chin_width) / self.face_width)
 
     def extract_eyebrows_features(self):
         # TODO use min between heights of the eyebrow points
@@ -151,7 +151,7 @@ class FaceFeatureExtractor:
                                                     self.shape[constants.NOSE_RIGHTEST_POINT_INDEX])
 
         self.add_feature("Nose width at nostrils", self.__scale_distance(nose_width))
-        self.add_feature("Nose widht to face widths", nose_width / self.face_width)
+        self.add_feature("Nose width to face widths", nose_width / self.face_width)
 
         nose_form = (self.shape[constants.NOSE_MIDDLE_POINT_INDEX][1] - self.shape[constants.NOSE_LEFTEST_POINT_INDEX][1])
         nose_form += (self.shape[constants.NOSE_MIDDLE_POINT_INDEX][1] - self.shape[constants.NOSE_RIGHTEST_POINT_INDEX][1])
@@ -191,13 +191,13 @@ class FaceFeatureExtractor:
 
         self.add_feature("Mouth width", self.__scale_distance(mouth_width))
 
-        left_checkbown_height = geometry_helper.point_distance(self.shape[constants.MOUTH_LEFT_CORNER_INDEX],
+        left_cheekbone_height = geometry_helper.point_distance(self.shape[constants.MOUTH_LEFT_CORNER_INDEX],
                                                                self.shape[constants.LEFT_EYE_LAST_POINT_INDEX - 1])
-        right_checkbown_height = geometry_helper.point_distance(self.shape[constants.MOUTH_RIGHT_CORNER_INDEX],
+        right_cheekbone_height = geometry_helper.point_distance(self.shape[constants.MOUTH_RIGHT_CORNER_INDEX],
                                                                self.shape[constants.RIGHT_EYE_LAST_POINT_INDEX - 1])
 
-        self.add_feature("Left checkbown height", self.__scale_distance(left_checkbown_height))
-        self.add_feature("Right checkbown height", self.__scale_distance(right_checkbown_height))
+        self.add_feature("Left cheekbone height", self.__scale_distance(left_cheekbone_height))
+        self.add_feature("Right cheekbone height", self.__scale_distance(right_cheekbone_height))
 
 
         left_jaw_size = geometry_helper.point_distance(self.shape[constants.LEFT_CHIN_START],
@@ -208,8 +208,8 @@ class FaceFeatureExtractor:
 
         self.add_feature("Left jaw size", self.__scale_distance(left_jaw_size))
         self.add_feature("Right jaw size", self.__scale_distance(right_jaw_size))
-        self.add_feature("Left checkbown height to left jaw size", left_checkbown_height / left_jaw_size)
-        self.add_feature("Right checkbown height to right jaw size", right_checkbown_height / right_jaw_size)
+        self.add_feature("Left cheekbone height to left jaw size", left_cheekbone_height / left_jaw_size)
+        self.add_feature("Right cheekbone height to right jaw size", right_cheekbone_height / right_jaw_size)
 
     def extract_skin_smoothness(self):
         (x, y, w, h) = face_utils.rect_to_bb(self.rect)
@@ -217,7 +217,7 @@ class FaceFeatureExtractor:
         face_mean = face.mean()
         avr_face_matrix = np.full((len(face),len(face[0])), face_mean, dtype=np.float)
 
-        self.add_feature("Skin Smoothenss", mean_squared_error(avr_face_matrix, face))
+        self.add_feature("Skin smoothness", mean_squared_error(avr_face_matrix, face))
 
     def extract_symmetricity(self):
         (x, y, w, h) = face_utils.rect_to_bb(self.rect)
@@ -233,7 +233,7 @@ class FaceFeatureExtractor:
         # print(len(left_face_rect[0]), len(rigth_face_rect[0]))
         # print(mean_squared_error(left_face_rect, rigth_face_rect))
 
-        self.add_feature('Symmeticity',mean_squared_error(left_face_rect, rigth_face_rect) )
+        self.add_feature('symmetricity',mean_squared_error(left_face_rect, rigth_face_rect) )
         # cv2.imshow("Output", left_face_rect)
         # cv2.imshow("Output", rigth_face_rect)
 
@@ -263,7 +263,7 @@ class FaceFeatureExtractor:
         # loop over the (x, y)-coordinates for the facial landmarks
         # and draw them on the image
         for (x, y) in self.shape:
-            cv2.circle(self.image, (x, y), 1, (0, 0, 255), -1)
+            cv2.circle(self.image, (x, y), 3, (0, 0, 255), -1)
 
         # point_between_the_eyebrows =
         mid_point = geometry_helper.middle_point_between(self.shape[constants.LEFT_EYEBROW_INNER_POINT_INDEX],

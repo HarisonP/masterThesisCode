@@ -1,0 +1,51 @@
+0 Relative Height: 213.51
+1 Relative Eye Level Width: 164.84
+2 Eye level Width To Height: 0.7720701754385965
+3 Relative Chin Width: 107.17
+4 Chin Level Width to Eye level Width: 0.6501545173604799
+5 Chin Level Width to Height: 0.5019649122807017
+6 Relative Chin height: 38.24
+7 Chin Height to Height : 0.1790877192982456
+8 Relative Chin to nose Height: 148.33
+9 Chin to nose Height to Height : 0.6947368421052632
+10 Chin Height to Chin to nose Height: 0.2577777777777778
+11 Relative size of the forehead: 65.18
+12 Cheekbone width: 57.67
+13 Cheekbone width to face width: 0.34984548263952003
+14 Relative distance between Pupils: 79.41
+15 Distance between Pupils to eye level Width: 0.48173059443737504
+16 Relative inner distance between eyes: 48.7
+17 Inner Distance between eyes to eye level Width: 0.2954008362115979
+18 Relative outer distance between eyes: 109.38
+19 Outer Distance between eyes to eye level Width: 0.663561170696237
+20 Right Eye Height: 11.33
+21 Left Eye Height: 11.26
+22 Right Eye Width: 30.2
+23 Left Eye Width: 30.8
+24 Left Eye Size: 346.808
+25 Right Eye Size: 342.166
+26 Left Eye Size to Right Eye Size: 1.0135665144988104
+27 Left eyebrow height: 8.99
+28 Right eyebrow height: 8.24
+29 Nose width at nostrils: 33.71
+30 Nose width to face widths: 0.20450827122341395
+31 Nose form: 10.49
+32 Nose height: 55.46
+33 Nose Size: 2495.7
+34 Left nostril size: 18.01
+35 Right nostril size: 17.3
+36 Left nostril size to right nostril size: 1.0411433521004763
+37 Lower lip relative height: 8.99
+38 Upper lip relative height: 3.0
+39 Lower lip to upper lip heights: 2.25
+40 Mouth width: 74.93
+41 Left cheekbone height: 59.3
+42 Right cheekbone height: 62.94
+43 Left jaw size: 36.89
+44 Right jaw size: 33.92
+45 Left cheekbone height to left jaw size: 1.6076360682372053
+46 Right cheekbone height to right jaw size: 1.855344522968198
+47 Hair Grayscaled color: 106.498245614
+48 Skintone Grayscaled color: 181.231897927
+49 symmetricity: 103.797883085
+50 Skin smoothness: 2197.41888318
