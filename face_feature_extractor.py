@@ -31,7 +31,7 @@ class FaceFeatureExtractor:
         faces = self.full_face_detector.detectMultiScale(self.gray, 1.3, 5)
 
         if(len(rects) > 1 or len(faces) > 1):
-            raise Exception("More than one face detected!!!")
+            raise Exception("More than one face detected!")
 
         self.rect = rects[0]
         self.full_face = faces[0]
@@ -48,9 +48,9 @@ class FaceFeatureExtractor:
         self.point_between_the_eyebrows = geometry_helper.middle_point_between(self.shape[constants.LEFT_EYEBROW_INNER_POINT_INDEX],
                                                                                self.shape[constants.RIGTH_EYEBROW_INNER_POINT_INDEX])
 
-        self.heightest_face_point = [self.point_between_the_eyebrows[0], self.full_face[1]]
+        self.hightest_face_point = [self.point_between_the_eyebrows[0], self.full_face[1]]
 
-        self.face_height = geometry_helper.point_distance(self.heightest_face_point,
+        self.face_height = geometry_helper.point_distance(self.hightest_face_point,
                                                           self.shape[constants.LOWEST_CHIN_POINT_INDEX])
 
 
@@ -271,7 +271,7 @@ class FaceFeatureExtractor:
         cv2.circle(self.image, (mid_point[0], mid_point[1]), 1, (255, 0, 0), -1)
         # show the output image with the face detections + facial landmarks
 
-        cv2.circle(self.image, (self.heightest_face_point[0], self.heightest_face_point[1] - 10), 5, (255, 155, 0), -1)
+        cv2.circle(self.image, (self.hightest_face_point[0], self.hightest_face_point[1] - 10), 5, (255, 155, 0), -1)
 
         cv2.circle(self.image, (self.left_pupils[0], self.left_pupils[1]), 3, (100, 200, 255), -1)
         cv2.circle(self.image, (self.rigth_pupils[0], self.rigth_pupils[1]), 3, (100, 200, 255), -1)
@@ -295,8 +295,8 @@ class FaceFeatureExtractor:
         hair_rect_width = int(self.face_width / 2)
         hair_rect_height = int(self.face_height / 5)
 
-        hair_rect_x = int(self.heightest_face_point[0] - hair_rect_width / 2)
-        hair_rect_y = int(self.heightest_face_point[1])
+        hair_rect_x = int(self.hightest_face_point[0] - hair_rect_width / 2)
+        hair_rect_y = int(self.hightest_face_point[1])
 
 
         rect_height = max(hair_rect_y - hair_rect_height, 0)
@@ -348,7 +348,6 @@ class FaceFeatureExtractor:
     def get_left_eye_width(self):
         return geometry_helper.point_distance(self.shape[constants.LEFT_EYE_LEFTEST_POINT_INDEX],
                                               self.shape[constants.LEFT_EYE_RIGHTEST_POINT_INDEX])
-
 
     def get_right_eye_width(self):
         return geometry_helper.point_distance(self.shape[constants.RIGHT_EYE_LEFTEST_POINT_INDEX],

@@ -18,8 +18,6 @@ def predict_score(features, scores):
     models_trainer_mixed = ModelsTrainer(features, scores)
     knn_predictor = models_trainer_mixed.train_scaled_fetures_knn()
     reg_tree = models_trainer_mixed.train_full_tree()
-    # svm_01 = models_trainer_mixed.train_scaled01_full_svm()
-
     feature_extractor = FaceFeatureExtractor(args["image"])
     img_features = feature_extractor.get_face_features()
 
@@ -28,11 +26,9 @@ def predict_score(features, scores):
 
     knn_score = knn_predictor.predict(features_girl_filtered)
     tree_score = reg_tree.predict(img_features['features_values'])
-    svm_score = svm_01.predict(features_girl_scaled)
 
     print("KNN: " ,knn_score)
     print("Tree: " ,tree_score)
-    # print("SVM: ", svm_score)
 
 def load_features_from_file(features_filename):
     with open(features_filename) as json_data:

@@ -9,6 +9,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.neighbors import RadiusNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
+from sklearn import tree
 from sklearn import preprocessing
 from sklearn.decomposition import PCA
 from sklearn.ensemble import AdaBoostRegressor
@@ -102,8 +103,11 @@ class ModelsTrainer:
     def get_ada_boost(self, clf, n_estimators):
         return AdaBoostRegressor(n_estimators=n_estimators, base_estimator=clf, loss="square")
 
-    def get_tree(self):
+    def get_forest(self):
         return RandomForestRegressor(random_state=1, n_estimators=300)
+
+    def get_tree(self):
+        return DecisionTreeRegressor(criterion="mse", max_depth=5)
 
     def get_knn(self):
         # the best for score_avr
@@ -117,7 +121,7 @@ class ModelsTrainer:
         return self.get_svm().fit(self.X_scaled01, Y)
 
     def train_regression_tree(self, X, Y):
-        return self.get_tree().fit(X, Y)
+        return self.get_forest().fit(X, Y)
 
     def train_full_tree(self):
         return self.train_regression_tree(self.X, self.Y)
@@ -128,15 +132,15 @@ class ModelsTrainer:
     def train_scaled01_full_svm(self):
         return self.train_svm(self.X_scaled01, self.Y)
 
-    def print_regression_tree(self, reg_tree):
+    def print_regression_tree(self, tree_image_name):
 
-        dot_data = tree.export_graphviz(reg_tree, out_file=None,
+        dot_data = tree.export_graphviz(self.get_tree().fit(self.X, self.Y), out_file=None,
                          feature_names=self.features_names,
                          filled=True, rounded=True,
                          special_characters=True)
 
         graph = pydotplus.graph_from_dot_data(dot_data)
-        graph.write_pdf("tree.pdf")
+        graph.write_pdf("./predictor_reports/graphics/" + tree_image_name + ".pdf")
 
     def train_cross_val(self, train_set, clf, scoring = 'neg_mean_absolute_error'):
         # print(self.X_scaled01)
@@ -173,19 +177,19 @@ class ModelsTrainer:
         return self.train_cross_val(self.X_scaled01, self.get_ada_boost(self.get_svm(), 150), scoring)
 
     def cross_val_tree(self, scoring):
-        return self.train_cross_val(self.X, self.get_tree(), scoring)
+        return self.train_cross_val(self.X, self.get_forest(), scoring)
 
     def cross_val_transformed_scaled_features_tree(self, scoring):
-        return self.train_cross_val(self.X_pca_transformed_scaled, self.get_tree(), scoring)
+        return self.train_cross_val(self.X_pca_transformed_scaled, self.get_forest(), scoring)
 
     def cross_val_transformed_features_tree(self, scoring):
-        return self.train_cross_val(self.X_pca_transformed, self.get_tree(), scoring)
+        return self.train_cross_val(self.X_pca_transformed, self.get_forest(), scoring)
 
     def cross_val_pca_scaled_filtered_features_tree(self, scoring):
-        return self.train_cross_val(self.X_pca_scaled_filtered, self.get_tree(), scoring)
+        return self.train_cross_val(self.X_pca_scaled_filtered, self.get_forest(), scoring)
 
     def cross_val_pca_filtered_features_tree(self, scoring):
-        return self.train_cross_val(self.X_pca_filtered, self.get_tree(), scoring)
+        return self.train_cross_val(self.X_pca_filtered, self.get_forest(), scoring)
 
     def cross_val_ada_boost_tree(self, scoring):
         return self.train_cross_val(self.X, self.get_ada_boost(None, 150), scoring)
@@ -203,7 +207,7 @@ class ModelsTrainer:
         return self.train_cross_val(self.X_transformed, self.get_knn(), scoring)
 
     def cross_val_pca_filtered_features_knn(self, scoring):
-        return self.train_cross_val(self.X_pca_filtered, self.get_tree(), scoring)
+        return self.train_cross_val(self.X_pca_filtered, self.get_forest(), scoring)
 
     def cross_val_pca_scaled_filtered_features_knn(self, scoring):
-        return self.train_cross_val(self.X_pca_scaled_filtered, self.get_tree(), scoring)
+        return self.train_cross_val(self.X_pca_scaled_filtered, self.get_forest(), scoring)

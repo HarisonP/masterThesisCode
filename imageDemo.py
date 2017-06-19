@@ -186,7 +186,7 @@ def train_personal_model(features, scores):
     validation_imgs = [os.path.basename(img) for img in validation_imgs]
     features_filtered = {}
     features_for_validation = {}
-    scores_extractor = ScoresExtractor( glob.glob(os.path.realpath(args["scores"])))
+    scores_extractor = ScoresExtractor( glob.glob(os.path.realpath(args["scoreszx"])))
 
     for img in features.items():
         if not(img[0] in validation_imgs):

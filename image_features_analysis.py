@@ -16,10 +16,9 @@ def box_plot_per_feature(features):
         feature_names = feature_dict['features_names']
         feature_matrix.append(feature_dict['features_values'])
 
-    print(feature_matrix)
     for index, column in enumerate(np.asarray(feature_matrix).T):
         plt.boxplot(column)
-        plt.savefig('feature_reports/graphics/' +feature_names[index] + ".png")
+        plt.savefig('feature_reports/graphics/' + feature_names[index] + ".png")
         plt.clf()
 
 features = load_features_from_file('features.json')
