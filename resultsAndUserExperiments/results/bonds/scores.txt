@@ -1,0 +1,6 @@
+daniel_craig.jpg: 8.45626037
+connery-sean-photo-sean-connery-622.jpg: 7.80619952
+Roger-Moore-dans-Moonraker-en-1979_portrait_w674_3436.jpg: 5.93838353,
+david-niven-007-300x224.jpg: 4.32359804,
+Timothy_Dalton)_-_Profile.jpg: 5.75208497,
+pierce-brosnan-james-bond-007-goldeneye.jpg: 7.31780187

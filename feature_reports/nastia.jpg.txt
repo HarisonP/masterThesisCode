@@ -1,0 +1,51 @@
+0 Relative Height: 209.12
+1 Relative Eye Level Width: 163.68
+2 Eye level Width To Height: 0.7827273690905237
+3 Relative Chin Width: 96.3
+4 Chin Level Width to Eye level Width: 0.588312963401835
+5 Chin Level Width to Height: 0.4604886580453678
+6 Relative Chin height: 33.21
+7 Chin Height to Height : 0.158813864744541
+8 Relative Chin to nose Height: 147.94
+9 Chin to nose Height to Height : 0.7074411702353189
+10 Chin Height to Chin to nose Height: 0.2244905603835781
+11 Relative size of the forehead: 61.18
+12 Cheekbone width: 67.39
+13 Cheekbone width to face width: 0.41168703659816497
+14 Relative distance between Pupils: 77.43
+15 Distance between Pupils to eye level Width: 0.47303382198598365
+16 Relative inner distance between eyes: 46.51
+17 Inner Distance between eyes to eye level Width: 0.2841520804414802
+18 Relative outer distance between eyes: 108.48
+19 Outer Distance between eyes to eye level Width: 0.6627619595761248
+20 Right Eye Height: 11.18
+21 Left Eye Height: 10.71
+22 Right Eye Width: 29.56
+23 Left Eye Width: 33.04
+24 Left Eye Size: 353.8584
+25 Right Eye Size: 330.4808
+26 Left Eye Size to Right Eye Size: 1.0707381487820171
+27 Left eyebrow height: 1.11
+28 Right eyebrow height: 14.41
+29 Nose width at nostrils: 30.24
+30 Nose width to face widths: 0.18475132884179166
+31 Nose form: 7.2
+32 Nose height: 58.87
+33 Nose Size: 3212.43
+34 Left nostril size: 16.11
+35 Right nostril size: 14.96
+36 Left nostril size to right nostril size: 1.0766666666666667
+37 Lower lip relative height: 10.51
+38 Upper lip relative height: 5.79
+39 Lower lip to upper lip heights: 1.01
+40 Mouth width: 57.12
+41 Left cheekbone height: 74.45
+42 Right cheekbone height: 75.34
+43 Left jaw size: 33.86
+44 Right jaw size: 19.66
+45 Left cheekbone height to left jaw size: 2.1988543371522096
+46 Right cheekbone height to right jaw size: 3.8330983930081763
+47 Hair Grayscaled color: 146.174364483
+48 Skintone Grayscaled color: 236.242086168
+49 symmetricity: 98.4895833333
+50 Skin smoothness: 2764.05840676

@@ -178,9 +178,13 @@ def predict_score(features, scores):
     print("KNN: " ,knn_score)
     print("Tree: " ,tree_score)
     print("SVM: ", svm_score)
+    # for index, name in enumerate(models_trainer_mixed.features_names):
+        # print(name, ": ", svm_01.coef_[0][index])
+        # print(name, ": ", models_trainer_mixed.pca.explained_variance_[index])
 
 
-# predict_score(features_women, scores_scaled)
+
+predict_score(features_women, scores_scaled)
 def train_personal_model(features, scores):
     validation_imgs = glob.glob(os.path.realpath('./dataset/validation_set/*.jpg'))
     validation_imgs = [os.path.basename(img) for img in validation_imgs]
@@ -207,4 +211,4 @@ def train_personal_model(features, scores):
 
 
 
-train_personal_model(features, scores_z_avr)
+# train_personal_model(features, scores_z_avr)

@@ -14,7 +14,6 @@ from sklearn import preprocessing
 from sklearn.decomposition import PCA
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.dummy import DummyRegressor
-from ensamble_stacking_predictor import StackingBestPredictor
 
 class ModelsTrainer:
     def __init__(self, features, scores):
@@ -43,6 +42,9 @@ class ModelsTrainer:
 
         self.scaled_features_above_threshold = np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0]
 
+        # for index, name in enumerate(self.features_names):
+        # print(name, ": ", svm_01.coef_[0][index])
+            # print(name, ": ", pca.explained_variance_[index])
 
         pca.n_components = len(np.where(pca.explained_variance_ > FEATURE_TRESHHOLD)[0])
         # print(pca.n_components)
@@ -140,7 +142,7 @@ class ModelsTrainer:
                          special_characters=True)
 
         graph = pydotplus.graph_from_dot_data(dot_data)
-        graph.write_pdf("./predictor_reports/graphics/" + tree_image_name + ".pdf")
+        graph.write_pdf("./predictor_reports/graphics/" + tree_image_name + ".png")
 
     def train_cross_val(self, train_set, clf, scoring = 'neg_mean_absolute_error'):
         # print(self.X_scaled01)

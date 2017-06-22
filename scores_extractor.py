@@ -8,6 +8,15 @@ class ScoresExtractor:
         self.filenames = file_names
         self.number_of_scores = len(file_names)
 
+    def extract_scores_for_histogram(self):
+        scores = []
+        for filename in self.filenames:
+            with open(filename) as json_file:
+                next_scores = json.load(json_file)
+                for key, value in next_scores.items():
+                    scores.append(value)
+
+        return scores
     def extract_average_scores(self):
         sum_of_scores = defaultdict(lambda: 0, {})
         average_scores = {}

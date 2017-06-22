@@ -14,7 +14,6 @@ import json
 from collections import OrderedDict
 import math
 
-
 def load_features_from_file(features_filename):
     with open(features_filename) as json_data:
         return json.load(json_data, object_pairs_hook=OrderedDict)
@@ -66,8 +65,9 @@ def train_personal_model(features, scores):
 
     svm = personal_predictor.train_personal_svm_predictor()
 
+    personal_predictor.print_presonal_tree()
     # print(svm.n_support_)
-    # personal_predictor.print_features_with_importance()
+    personal_predictor.print_features_with_importance()
 
     test_scores = [scores[key] for key, value in features_for_validation.items()]
     test_features = [value['features_values'] for key, value in features_for_validation.items()]

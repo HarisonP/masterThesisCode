@@ -1,0 +1,51 @@
+0 Relative Height: 172.23
+1 Relative Eye Level Width: 135.33
+2 Eye level Width To Height: 0.7857835878057499
+3 Relative Chin Width: 88.33
+4 Chin Level Width to Eye level Width: 0.6527164023914739
+5 Chin Level Width to Height: 0.5128938364908339
+6 Relative Chin height: 29.02
+7 Chin Height to Height : 0.1685135066128785
+8 Relative Chin to nose Height: 125.01
+9 Chin to nose Height to Height : 0.7258336312107438
+10 Chin Height to Chin to nose Height: 0.2321654706627269
+11 Relative size of the forehead: 47.22
+12 Cheekbone width: 47.0
+13 Cheekbone width to face width: 0.3472835976085261
+14 Relative distance between Pupils: 61.75
+15 Distance between Pupils to eye level Width: 0.45626462178320765
+16 Relative inner distance between eyes: 36.74
+17 Inner Distance between eyes to eye level Width: 0.27144528203795165
+18 Relative outer distance between eyes: 86.46
+19 Outer Distance between eyes to eye level Width: 0.6388744476215233
+20 Right Eye Height: 9.18
+21 Left Eye Height: 8.84
+22 Right Eye Width: 21.99
+23 Left Eye Width: 28.16
+24 Left Eye Size: 248.9344
+25 Right Eye Size: 201.86819999999997
+26 Left Eye Size to Right Eye Size: 1.233153116736564
+27 Left eyebrow height: 11.43
+28 Right eyebrow height: 1.76
+29 Nose width at nostrils: 25.19
+30 Nose width to face widths: 0.1861190538081622
+31 Nose form: 8.79
+32 Nose height: 51.91
+33 Nose Size: 1486.84
+34 Left nostril size: 15.06
+35 Right nostril size: 11.96
+36 Left nostril size to right nostril size: 1.258823529411765
+37 Lower lip relative height: 10.59
+38 Upper lip relative height: 6.22
+39 Lower lip to upper lip heights: 1.5
+40 Mouth width: 54.87
+41 Left cheekbone height: 58.47
+42 Right cheekbone height: 63.32
+43 Left jaw size: 33.95
+44 Right jaw size: 18.13
+45 Left cheekbone height to left jaw size: 1.722279792746114
+46 Right cheekbone height to right jaw size: 3.4917555771096023
+47 Hair Grayscaled color: 107.609986505
+48 Skintone Grayscaled color: 147.219298246
+49 symmetricity: 106.977963972
+50 Skin smoothness: 2378.53097424

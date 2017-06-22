@@ -100,7 +100,7 @@
     "100_Raag_Singhal_0001.jpg": 7,
     "101_Raaf_Schefter_0001.jpg": 5,
     "102_Queen_Silvia_0001.jpg": 2,
-    "103_Queen_Latifah_0004.jpg": 3,
+    "103_Nancy_Humbert_0001.jpg": 3,
     "104_Priscilla_Owen_0001.jpg": 2,
     "105_Natalie_Imbruglia_0001.jpg": 10,
     "106_Natalie_Coughlin_0005.jpg": 6,

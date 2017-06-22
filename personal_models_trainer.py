@@ -1,11 +1,14 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.dummy import DummyClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn import svm
+import pydotplus
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
 import ntpath
+from sklearn import tree
 
 class PersonalModelTrainer:
     def __init__(self, pulbic_opinion_predictor, user_scores, features, user_name):
@@ -13,7 +16,7 @@ class PersonalModelTrainer:
         self.user_scores = user_scores
 
         self.features_names = [value['features_names'] for key, value in features.items()][0]
-
+        self.features_names.append("Public Opinion ")
         for key, value in features.items():
             public_score = pulbic_opinion_predictor.predict(value['features_values'])
             value['features_values'].append(public_score)
@@ -21,10 +24,11 @@ class PersonalModelTrainer:
         self.X = [value['features_values'] for key, value in features.items()]
         self.Y = [user_scores[key] for key, value in features.items()]
 
-        print(self.Y)
         plt.boxplot(self.Y)
+        # plt.show()
         plt.savefig('score_reports/graphics/' + ntpath.basename(user_name) + ".png")
         # plt.clf()
+        self.user_name = user_name
         self.Y = [self.__create_classes(val) for val in self.Y]
 
         self.train_base_lane()
@@ -39,22 +43,22 @@ class PersonalModelTrainer:
         else:
             return 2
 
-
-    def print_features_with_importance(self):
-        features_avr_importance = {}
-        for index, name in enumerate(self.features_names):
-            print("Class 0", name, ":", self.svm.coef_[0][index])
-            print("Class 1", name, ":", self.svm.coef_[1][index])
-            print("Class 2", name, ":", self.svm.coef_[2][index])
-            features_avr_importance[name] = (self.svm.coef_[0][index] + self.svm.coef_[1][index] + self.svm.coef_[2][index]) /3
-
-        for key, val in features_avr_importance.items():
-            print(key, ": ", val)
-
     def train_personal_svm_predictor (self):
         self.svm = svm.SVC(kernel="linear", C = 1, class_weight="balanced", decision_function_shape="ovo")
         self.svm.fit(self.X, self.Y)
         return self.svm
+
+    def get_tree(self):
+        return DecisionTreeClassifier(max_depth=100)
+
+    def print_presonal_tree(self):
+        dot_data = tree.export_graphviz(self.get_tree().fit(self.X, self.Y), out_file=None,
+                         feature_names=self.features_names,
+                         filled=True, rounded=True,
+                         special_characters=True)
+
+        graph = pydotplus.graph_from_dot_data(dot_data)
+        graph.write_pdf("./predictor_reports/graphics/" + ntpath.basename(self.user_name )+ ".pdf")
 
     def train_personal_tree_predictor(self):
         self.forest = RandomForestClassifier(n_estimators=180, criterion="entropy",class_weight="balanced", random_state=1)
